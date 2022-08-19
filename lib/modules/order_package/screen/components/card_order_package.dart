@@ -1,7 +1,9 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CardOrderPackage extends StatelessWidget {
   const CardOrderPackage({
@@ -80,6 +82,18 @@ class CardOrderPackage extends StatelessWidget {
                     color: AppConstant.statusColor[order.status],
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextCustom(
+                        title: DateFormat('dd/MM/yyyy').format(order.checkIn),
+                        fontSize: 10,
+                      ),
+                    ],
                   ),
                 ),
               ],

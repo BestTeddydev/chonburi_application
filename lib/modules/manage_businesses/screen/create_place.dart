@@ -32,7 +32,7 @@ class _CreatePlaceState extends State<CreatePlace> {
   TextEditingController placeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+  // TextEditingController priceController = TextEditingController();
   onSelectImagePlace(File image) {
     context.read<ManageBusinessesBloc>().add(
           SelectImagePlaceEvent(image: image),
@@ -95,15 +95,15 @@ class _CreatePlaceState extends State<CreatePlace> {
                             requiredText: 'กรุณากรอกชื่อสถานที่',
                           ),
                         ),
-                        Container(
-                          width: width * 0.7,
-                          margin: const EdgeInsets.all(10),
-                          child: TextFormFieldCustom(
-                            controller: priceController,
-                            labelText: 'ราคาค่าเข้าสถานที่',
-                            requiredText: 'กรุณากรอกราคาค่าเข้าสถานที่',
-                          ),
-                        ),
+                        // Container(
+                        //   width: width * 0.7,
+                        //   margin: const EdgeInsets.all(10),
+                        //   child: TextFormFieldCustom(
+                        //     controller: priceController,
+                        //     labelText: 'ราคาค่าเข้าสถานที่',
+                        //     requiredText: 'กรุณากรอกราคาค่าเข้าสถานที่',
+                        //   ),
+                        // ),
                         Container(
                           width: width * 0.7,
                           margin: const EdgeInsets.all(10),
@@ -250,7 +250,8 @@ class _CreatePlaceState extends State<CreatePlace> {
                                       lat: locationState.curLat,
                                       lng: locationState.curLng,
                                       ownerId: widget.userId,
-                                      price: double.parse(priceController.text),
+                                      price: 0,
+                                      // price: double.parse(priceController.text),
                                     );
                                     context.read<ManageBusinessesBloc>().add(
                                           CreatePlaceEvent(

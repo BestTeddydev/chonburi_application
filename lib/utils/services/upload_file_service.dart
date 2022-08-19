@@ -41,7 +41,7 @@ class UploadService {
       );
       files.add(file);
     }
-    FormData formData = FormData.fromMap({"detail": files});
+    FormData formData = FormData.fromMap({"images": files});
     await DioService.dioPost('/upload/file/multiple', formData);
     return fileNames;
   }

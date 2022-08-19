@@ -17,7 +17,6 @@ class MainPackageAdmin extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          // automaticallyImplyLeading: false,
           backgroundColor: AppConstant.themeApp,
           iconTheme: IconThemeData(
             color: AppConstant.colorText,

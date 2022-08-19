@@ -11,6 +11,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     on<UserLoginEvent>(_userLogin);
     on<UserLogoutEvent>(_userLogout);
     on<PressPasswordEvent>(_pressedPassword);
+    on<UpdateDeviceTokenEvent>(_updateTokenDevice);
   }
 
   void _userLogin(UserLoginEvent event, Emitter<UserState> emitter) async {
@@ -25,7 +26,6 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
       emitter(UserState(hasError: true, loading: false));
     }
   }
-
 
   void _userLogout(UserLogoutEvent event, Emitter<UserState> emitter) {
     try {
@@ -44,6 +44,23 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
         eyesPassword: !state.eyesPassword,
       ),
     );
+  }
+
+  void _updateTokenDevice(
+      UpdateDeviceTokenEvent event, Emitter<UserState> emitter) async {
+    try {
+      if (state.user.token.isNotEmpty) {
+        await UserService.updateTokenDevice(
+            event.token, state.user.userId, state.user.token);
+      }
+      emitter(
+        UserState(
+          user: state.user.copyWith(tokenDevice: event.token),
+        ),
+      );
+    } catch (e) {
+      emitter(UserState(hasError: true));
+    }
   }
 
   @override

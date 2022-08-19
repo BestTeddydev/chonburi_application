@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/register/screen/register.dart';
+import 'package:chonburi_mobileapp/modules/register_partner/screen/partner_register.dart';
 import 'package:chonburi_mobileapp/widget/dialog_error.dart';
 import 'package:chonburi_mobileapp/widget/dialog_loading.dart';
 import 'package:chonburi_mobileapp/widget/text_form_field.dart';
@@ -200,7 +201,15 @@ class _AuthenLoginState extends State<AuthenLogin> {
                               ],
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (builder) =>
+                                        const PartnerRegister(),
+                                  ),
+                                );
+                              },
                               child: RichText(
                                 text: const TextSpan(
                                   text: 'เข้าร่วมกับเรา? ',

@@ -16,4 +16,13 @@ class UserService {
   static Future<void> registerUser(UserRegisterModel user) async {
     await DioService.dioPost('/user/register', user.toMap());
   }
+
+  static Future<void> updateTokenDevice(
+      String tokenDevice, String userId, String token) async {
+    await DioService.dioPut(
+      '/user/device/token/$userId',
+      token,
+      {"tokenDevice": tokenDevice},
+    );
+  }
 }

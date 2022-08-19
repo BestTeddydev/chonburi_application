@@ -40,7 +40,7 @@ class _EditPlaceState extends State<EditPlace> {
   TextEditingController placeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+  // TextEditingController priceController = TextEditingController();
   onSelectImagePlace(File image) {
     context.read<ManageBusinessesBloc>().add(
           SelectImagePlaceEvent(image: image),
@@ -53,7 +53,7 @@ class _EditPlaceState extends State<EditPlace> {
     placeController.text = widget.place.placeName;
     addressController.text = widget.place.address;
     descriptionController.text = widget.place.description;
-    priceController.text = widget.place.price.toString();
+    // priceController.text = widget.place.price.toString();
     convertImageToFile();
   }
 
@@ -87,7 +87,6 @@ class _EditPlaceState extends State<EditPlace> {
       ),
     );
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -146,15 +145,15 @@ class _EditPlaceState extends State<EditPlace> {
                             requiredText: 'กรุณากรอกชื่อสถานที่',
                           ),
                         ),
-                        Container(
-                          width: width * 0.7,
-                          margin: const EdgeInsets.all(10),
-                          child: TextFormFieldCustom(
-                            controller: priceController,
-                            labelText: 'ราคาค่าเข้าสถานที่',
-                            requiredText: 'กรุณากรอกราคาค่าเข้าสถานที่',
-                          ),
-                        ),
+                        // Container(
+                        //   width: width * 0.7,
+                        //   margin: const EdgeInsets.all(10),
+                        //   child: TextFormFieldCustom(
+                        //     controller: priceController,
+                        //     labelText: 'ราคาค่าเข้าสถานที่',
+                        //     requiredText: 'กรุณากรอกราคาค่าเข้าสถานที่',
+                        //   ),
+                        // ),
                         Container(
                           width: width * 0.7,
                           margin: const EdgeInsets.all(10),
@@ -326,7 +325,8 @@ class _EditPlaceState extends State<EditPlace> {
                                       lat: locationState.curLat,
                                       lng: locationState.curLng,
                                       ownerId: place.ownerId,
-                                      price: double.parse(priceController.text),
+                                      price: 0,
+                                      // price: double.parse(priceController.text),
                                     );
                                     context.read<ManageBusinessesBloc>().add(
                                           UpdatePlaceEvent(

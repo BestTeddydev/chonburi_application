@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "208630799137",
+    "project_id": "chonburi-baff9",
+    "storage_bucket": "chonburi-baff9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208630799137:android:f177b126da32d29eca7c60",
+        "android_client_info": {
+          "package_name": "com.teddydev.chonburi_mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208630799137-vjuphr340i2ke38415h4eco6ophmpihi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwKJ8rrSJMnuANrQLCBI7qnmU-zT_ED2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208630799137-vjuphr340i2ke38415h4eco6ophmpihi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "208630799137-etceeeam9mdl5et2ljqngofpb5hvb5r1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.teddydev.chonburiMobileapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

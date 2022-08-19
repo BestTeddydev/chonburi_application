@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/screen/home_package.dart';
 import 'package:chonburi_mobileapp/modules/home/screen/components/menu_card_admin.dart';
+import 'package:chonburi_mobileapp/widget/warning.dart';
 import 'package:flutter/material.dart';
 
 class HomeBuyer extends StatelessWidget {
@@ -10,30 +11,31 @@ class HomeBuyer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> menuCards = [
-      // {
-      //   "title": 'สมาชิกในระบบ',
-      //   "pathImage": AppConstantAssets.memberPicture,
-      //   "goWidget": const BuyerList(),
-      // },
-      // {
-      //   "title": 'พาร์ทเนอร์',
-      //   "pathImage": AppConstantAssets.partnerImage,
-      //   "goWidget": Partner(),
-      // },
       {
         "title": 'แพ็คเกจทัวร์',
         "pathImage": AppConstantAssets.packageImage,
         "goWidget": const HomePackages(),
       },
+      {
+        "title": 'ร้านอาหาร',
+        "pathImage": AppConstantAssets.foogImage,
+        "goWidget": const WarningDeveloping(),
+      },
+      {
+        "title": 'สินค้า OTOP',
+        "pathImage": AppConstantAssets.otopImage,
+        "goWidget": const WarningDeveloping(),
+      },
+      {
+        "title": 'บ้านพัก',
+        "pathImage": AppConstantAssets.resortImage,
+        "goWidget": const WarningDeveloping(),
+      },
+
       // {
       //   "title": 'แหล่งท่องเที่ยว',
       //   "pathImage": AppConstantAssets.locationImage,
       //   "goWidget": Locations(isAdmin: true),
-      // },
-      // {
-      //   "title": 'ไกด์นำเที่ยว',
-      //   "pathImage": AppConstantAssets.guideImage,
-      //   "goWidget": GuideList(),
       // },
 
       // {
@@ -78,10 +80,11 @@ class HomeBuyer extends StatelessWidget {
                 width: width * 1,
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio:
-                      height > 730 ? width / height / 0.4 : width / height / 1,
-                  // crossAxisSpacing: 15,
-                  // mainAxisSpacing: 15,
+                  childAspectRatio: height > 730
+                      ? width / height / 0.4
+                      : width / height / 0.6,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
                   children: List.generate(
                     menuCards.length,
                     (index) => MenuCard(

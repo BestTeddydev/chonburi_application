@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/screen/admin/activity_list.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/screen/main_package.dart';
+import 'package:chonburi_mobileapp/modules/partner/screen/home_partner.dart';
 import 'package:flutter/material.dart';
 
 import 'components/menu_card_admin.dart';
@@ -21,11 +22,11 @@ class HomeAdmin extends StatelessWidget {
       //   "pathImage": AppConstantAssets.memberPicture,
       //   "goWidget": const BuyerList(),
       // },
-      // {
-      //   "title": 'พาร์ทเนอร์',
-      //   "pathImage": AppConstantAssets.partnerImage,
-      //   "goWidget": Partner(),
-      // },
+      {
+        "title": 'ผู้ประกอบการ',
+        "pathImage": AppConstantAssets.partnerImage,
+        "goWidget": const HomePartnerApprove(),
+      },
       {
         "title": 'แพ็คเกจทัวร์',
         "pathImage": AppConstantAssets.packageTourImage,

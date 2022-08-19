@@ -24,3 +24,9 @@ class UserLogoutEvent extends UserEvent {
 }
 
 class PressPasswordEvent extends UserEvent {}
+
+class UpdateDeviceTokenEvent extends UserEvent {
+  final String token;
+
+  const UpdateDeviceTokenEvent({required this.token});
+}

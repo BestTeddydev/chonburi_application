@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/businesses/bloc/businesses_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_activity.dart';
+import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_food.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/setting_business.dart';
 import 'package:chonburi_mobileapp/modules/notification/screen/notification.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,10 @@ class _HomeBusinessState extends State<HomeBusiness> {
         return Scaffold(
           body: SafeArea(
             child: [
+              MainFood(
+                businessId: widget.businessId,
+                token: state.user.token,
+              ),
               MainActivity(businessId: widget.businessId),
               MyNotification(recipientId: widget.businessId),
               SettingBusiness(
@@ -52,6 +57,10 @@ class _HomeBusinessState extends State<HomeBusiness> {
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: AppConstant.themeApp,
             items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: 'หน้าหลัก',
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.local_activity_outlined),
                 label: 'กิจกรรม',

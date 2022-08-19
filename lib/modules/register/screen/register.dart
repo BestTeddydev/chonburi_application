@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/register/bloc/register_bloc.dart';
 import 'package:chonburi_mobileapp/modules/register/models/user_register_model.dart';
 import 'package:chonburi_mobileapp/widget/dialog_camera.dart';
@@ -31,7 +32,7 @@ class _RegisterUserState extends State<RegisterUser> {
     context.read<RegisterBloc>().add(SelectProfileRefEvent(profileRef: image));
   }
 
-  onSubmit(String? pathName) {
+  onSubmit(String tokenDevice, String? pathName) {
     if (_formKey.currentState!.validate()) {
       UserRegisterModel userRegisterModel = UserRegisterModel(
         username: usernameController.text,
@@ -40,7 +41,7 @@ class _RegisterUserState extends State<RegisterUser> {
         password: passwordController.text,
         roles: 'buyer',
         tokenDevice: '',
-        profileRef: '',
+        profileRef: tokenDevice,
       );
       context.read<RegisterBloc>().add(
             RegisterUserEvent(
@@ -221,23 +222,29 @@ class _RegisterUserState extends State<RegisterUser> {
                                   requiredText: 'กรุณากรอกรหัสผ่าน',
                                 ),
                               ),
-                              Container(
-                                margin: const EdgeInsets.all(16),
-                                width: width * 0.5,
-                                child: ElevatedButton(
-                                  onPressed: () => onSubmit(
-                                    state.profileRef.path.isNotEmpty
-                                        ? state.profileRef.path
-                                        : null,
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: AppConstant.bgbutton,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                              BlocBuilder<UserBloc, UserState>(
+                                builder: (context, stateUser) {
+                                  return Container(
+                                    margin: const EdgeInsets.all(16),
+                                    width: width * 0.5,
+                                    child: ElevatedButton(
+                                      onPressed: () => onSubmit(
+                                        stateUser.user.tokenDevice,
+                                        state.profileRef.path.isNotEmpty
+                                            ? state.profileRef.path
+                                            : null,
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: AppConstant.bgbutton,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                      child: const Text('สมัครสมาชิก'),
                                     ),
-                                  ),
-                                  child: const Text('สมัครสมาชิก'),
-                                ),
+                                  );
+                                },
                               ),
                             ],
                           ),
