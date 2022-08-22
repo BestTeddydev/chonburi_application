@@ -48,3 +48,5 @@ class SelectCategoryEvent extends CategoryEvent {
     required this.category,
   });
 }
+
+class ClearSelectedCategoryEvent extends CategoryEvent{}

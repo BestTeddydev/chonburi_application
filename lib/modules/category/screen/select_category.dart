@@ -52,13 +52,6 @@ class _SelectCategoryState extends State<SelectCategory> {
                         height: 60,
                         decoration: const BoxDecoration(
                           color: Colors.white,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.black45,
-                          //     offset: Offset(0, 0.6),
-                          //     blurRadius: 10.0,
-                          //   ),
-                          // ],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

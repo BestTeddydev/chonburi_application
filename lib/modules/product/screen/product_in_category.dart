@@ -1,29 +1,27 @@
+import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/category/bloc/category_bloc.dart';
 import 'package:chonburi_mobileapp/modules/category/models/category_model.dart';
-import 'package:chonburi_mobileapp/modules/food/bloc/food_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/models/food_model.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/edit_food.dart';
+import 'package:chonburi_mobileapp/modules/product/bloc/product_bloc.dart';
+import 'package:chonburi_mobileapp/modules/product/models/product_models.dart';
+import 'package:chonburi_mobileapp/modules/product/screen/edit_product.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FoodInCategory extends StatefulWidget {
+class ProductInCategory extends StatefulWidget {
   final String token;
-  const FoodInCategory({
-    Key? key,
-    required this.token,
-  }) : super(key: key);
+  const ProductInCategory({Key? key, required this.token}) : super(key: key);
 
   @override
-  State<FoodInCategory> createState() => _FoodInCategoryState();
+  State<ProductInCategory> createState() => _ProductInCategoryState();
 }
 
-class _FoodInCategoryState extends State<FoodInCategory> {
+class _ProductInCategoryState extends State<ProductInCategory> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return BlocBuilder<FoodBloc, FoodState>(
+    return BlocBuilder<ProductBloc, ProductState>(
       builder: (context, state) {
         return BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, stateCategory) {
@@ -33,7 +31,7 @@ class _FoodInCategoryState extends State<FoodInCategory> {
               itemCount: stateCategory.categories.length,
               itemBuilder: (context, index) {
                 CategoryModel categoryModel = stateCategory.categories[index];
-                List<FoodModel> foods = state.foods
+                List<ProductModel> products = state.products
                     .where(
                       (element) => element.categoryId == categoryModel.id,
                     )
@@ -47,9 +45,9 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: foods.length,
-                        itemBuilder: (context, indexFood) {
-                          FoodModel food = foods[indexFood];
+                        itemCount: products.length,
+                        itemBuilder: (context, indexProduct) {
+                          ProductModel product = products[indexProduct];
                           return Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -58,10 +56,10 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (builder) => EditFood(
-                                    food: food,
-                                    token: widget.token,
+                                  builder: (builder) => EditProduct(
                                     category: categoryModel,
+                                    product: product,
+                                    token: widget.token,
                                   ),
                                 ),
                               ),
@@ -74,24 +72,42 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: ShowImageNetwork(
-                                        pathImage: food.imageRef,
+                                        pathImage: product.imageRef,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    width: width * 0.6,
+                                    width: width * 0.5,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         TextCustom(
-                                          title: food.foodName,
+                                          title: product.productName,
                                           maxLine: 2,
                                         ),
                                         TextCustom(
-                                          title: '${food.price} ฿',
+                                          title: '${product.price} ฿',
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Switch(
+                                      value: product.status,
+                                      activeColor: AppConstant.themeApp,
+                                      onChanged: (bool status) {
+                                        if (status != product.status) {
+                                          context.read<ProductBloc>().add(
+                                                UpdateStatusEvent(
+                                                  token: widget.token,
+                                                  productModel: product
+                                                      .copyWith(status: status),
+                                                ),
+                                              );
+                                        }
+                                      },
                                     ),
                                   ),
                                 ],

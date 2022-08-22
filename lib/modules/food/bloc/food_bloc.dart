@@ -55,7 +55,7 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
         FoodState(
           foods: state.foods,
           hasError: true,
-          message: 'บันทึกข้อมูลอาหารเรียบร้อย',
+          message: 'บันทึกข้อมูลอาหารล้มเหลว',
         ),
       );
     }
@@ -63,6 +63,13 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
 
   void _editFood(EditFoodEvent event, Emitter<FoodState> emitter) async {
     try {
+      emitter(
+        FoodState(
+          foods: state.foods,
+          imageFood: state.imageFood,
+          loading: true,
+        ),
+      );
       if (state.imageFood.path.isNotEmpty) {
         String imageRef = await UploadService.singleFile(state.imageFood.path);
         event.foodModel.imageRef = imageRef;
@@ -79,8 +86,10 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
       emitter(
         FoodState(
           foods: allFood,
+          imageFood: state.imageFood,
           loaded: true,
           message: 'แก้ไขข้อมูลอาหารเรียบร้อย',
+          loading: false,
         ),
       );
     } catch (e) {
@@ -89,6 +98,7 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
           foods: state.foods,
           hasError: true,
           message: 'แก้ไขข้อมูลอาหารล้มเหลว',
+          loading: false,
         ),
       );
     }
@@ -104,11 +114,16 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
               (element) => element.id == event.docId,
             ),
           loaded: true,
+          message: 'ลบข้อมูลอาหารเรียบร้อย',
         ),
       );
     } catch (e) {
       emitter(
-        FoodState(foods: state.foods, hasError: true),
+        FoodState(
+          foods: state.foods,
+          hasError: true,
+          message: 'ลบข้อมูลอาหารล้มเหลว',
+        ),
       );
     }
   }

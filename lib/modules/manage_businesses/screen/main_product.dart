@@ -1,31 +1,33 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/category/bloc/category_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/bloc/food_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/create_food.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/food_in_category.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/components/header_create_edit.dart';
+import 'package:chonburi_mobileapp/modules/product/bloc/product_bloc.dart';
+import 'package:chonburi_mobileapp/modules/product/screen/create_product.dart';
+import 'package:chonburi_mobileapp/modules/product/screen/product_in_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainFood extends StatefulWidget {
+class MainProduct extends StatefulWidget {
   final String businessId, token;
-  const MainFood({
+  const MainProduct({
     Key? key,
     required this.businessId,
     required this.token,
   }) : super(key: key);
 
   @override
-  State<MainFood> createState() => _MainFoodState();
+  State<MainProduct> createState() => _MainProductState();
 }
 
-class _MainFoodState extends State<MainFood> {
+class _MainProductState extends State<MainProduct> {
   @override
   void initState() {
     context
         .read<CategoryBloc>()
         .add(FetchCategoryEvent(businessId: widget.businessId));
-    context.read<FoodBloc>().add(FetchFoodEvent(businessId: widget.businessId));
+    context
+        .read<ProductBloc>()
+        .add(FetchsProductEvent(businessId: widget.businessId));
     super.initState();
   }
 
@@ -34,7 +36,7 @@ class _MainFoodState extends State<MainFood> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'รายการอาหาร',
+          'รายการผลิตภัณฑ์ชุมชน',
           style: TextStyle(color: AppConstant.colorTextHeader),
         ),
         backgroundColor: AppConstant.themeApp,
@@ -46,15 +48,13 @@ class _MainFoodState extends State<MainFood> {
           HeaderCreateAndEdit(
             businessId: widget.businessId,
             token: widget.token,
-            createProduct: CreateFood(
+            createProduct: CreateProduct(
               businessId: widget.businessId,
               token: widget.token,
             ),
-            type: 'อาหาร',
+            type: 'สินค้า',
           ),
-          FoodInCategory(
-            token: widget.token,
-          ),
+          ProductInCategory(token: widget.token),
         ],
       ),
     );

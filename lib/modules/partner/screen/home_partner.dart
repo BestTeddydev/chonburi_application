@@ -1,6 +1,5 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
-import 'package:chonburi_mobileapp/modules/manage_package/bloc/manage_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/partner/bloc/manage_partner_bloc.dart';
 import 'package:chonburi_mobileapp/modules/partner/screen/partner_list.dart';
 import 'package:flutter/material.dart';

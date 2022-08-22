@@ -1,4 +1,6 @@
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/bloc/manage_room_bloc.dart';
+import 'package:chonburi_mobileapp/modules/product/bloc/product_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +55,8 @@ void main() async {
           BlocProvider(create: (context) => FoodBloc()),
           BlocProvider(create: (context) => RegisterPartnerBloc()),
           BlocProvider(create: (context) => ManagePartnerBloc()),
+          BlocProvider(create: (context) => ProductBloc()),
+          BlocProvider(create: (context) => ManageRoomBloc()),
         ],
         child: const MyApp(),
       ),

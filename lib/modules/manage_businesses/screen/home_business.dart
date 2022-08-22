@@ -1,18 +1,15 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
-import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/businesses/bloc/businesses_bloc.dart';
-import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_activity.dart';
-import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_food.dart';
-import 'package:chonburi_mobileapp/modules/manage_businesses/screen/setting_business.dart';
-import 'package:chonburi_mobileapp/modules/notification/screen/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBusiness extends StatefulWidget {
   final String businessId;
+  final List<Widget> itemTabs;
   const HomeBusiness({
     Key? key,
     required this.businessId,
+    required this.itemTabs,
   }) : super(key: key);
 
   @override
@@ -38,58 +35,44 @@ class _HomeBusinessState extends State<HomeBusiness> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: [
-              MainFood(
-                businessId: widget.businessId,
-                token: state.user.token,
-              ),
-              MainActivity(businessId: widget.businessId),
-              MyNotification(recipientId: widget.businessId),
-              SettingBusiness(
-                token: state.user.token,
-              ),
-            ][_selected],
+    return Scaffold(
+      body: SafeArea(
+        child: widget.itemTabs[_selected],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppConstant.themeApp,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'หน้าหลัก',
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: AppConstant.themeApp,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'หน้าหลัก',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.local_activity_outlined),
-                label: 'กิจกรรม',
-              ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_activity_outlined),
+            label: 'กิจกรรม',
+          ),
 
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.reorder),
-              //   label: 'ออร์เดอร์',
-              // ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.auto_graph),
-              //   label: 'สถิติ',
-              // ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                label: 'แจ้งเตือน',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'ตั้งค่า',
-              ),
-            ],
-            onTap: _onItemTapped,
-            currentIndex: _selected,
-            selectedItemColor: AppConstant.colorTextHeader,
-            unselectedItemColor: AppConstant.bgHasTaged,
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.reorder),
+          //   label: 'ออร์เดอร์',
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.auto_graph),
+          //   label: 'สถิติ',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'แจ้งเตือน',
           ),
-        );
-      },
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'ตั้งค่า',
+          ),
+        ],
+        onTap: _onItemTapped,
+        currentIndex: _selected,
+        selectedItemColor: AppConstant.colorTextHeader,
+        unselectedItemColor: AppConstant.bgHasTaged,
+      ),
     );
   }
 }

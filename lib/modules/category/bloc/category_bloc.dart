@@ -15,6 +15,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<EditCategoryEvent>(_editCategory);
     on<DeleteCategoryEvent>(_deleteCategory);
     on<SelectCategoryEvent>(_selectCategory);
+    on<ClearSelectedCategoryEvent>(_clearSelected);
   }
   void _fetchCategory(
       FetchCategoryEvent event, Emitter<CategoryState> emitter) async {
@@ -117,6 +118,15 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       CategoryState(
         categories: state.categories,
         selectedCategory: event.category,
+      ),
+    );
+  }
+
+  void _clearSelected(
+      ClearSelectedCategoryEvent event, Emitter<CategoryState> emitter) {
+    emitter(
+      CategoryState(
+        categories: state.categories,
       ),
     );
   }

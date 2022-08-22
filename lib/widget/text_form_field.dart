@@ -8,6 +8,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final Color? background;
   final Color? fontColor;
   final int? maxLines;
+  final TextInputType? textInputType;
   const TextFormFieldCustom({
     Key? key,
     required this.controller,
@@ -16,6 +17,7 @@ class TextFormFieldCustom extends StatelessWidget {
     this.background,
     this.fontColor,
     this.maxLines,
+    this.textInputType,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class TextFormFieldCustom extends StatelessWidget {
         return null;
       },
       maxLines: maxLines ?? 1,
+      keyboardType: textInputType ?? TextInputType.text,
       decoration: InputDecoration(
         fillColor: background ?? AppConstant.bgTextFormField,
         filled: true,

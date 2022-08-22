@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:chonburi_mobileapp/config/routes/route.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';

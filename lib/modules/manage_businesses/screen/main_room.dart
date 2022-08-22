@@ -1,40 +1,34 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/category/bloc/category_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/bloc/food_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/create_food.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/food_in_category.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/components/header_create_edit.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/bloc/manage_room_bloc.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/screen/create_room.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/screen/room_in_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class MainFood extends StatefulWidget {
-  final String businessId, token;
-  const MainFood({
-    Key? key,
-    required this.businessId,
-    required this.token,
-  }) : super(key: key);
+class MainRoom extends StatefulWidget {
+  final String token, businessId;
+  const MainRoom({Key? key,required this.businessId,required this.token,}) : super(key: key);
 
   @override
-  State<MainFood> createState() => _MainFoodState();
+  State<MainRoom> createState() => _MainRoomState();
 }
 
-class _MainFoodState extends State<MainFood> {
-  @override
+class _MainRoomState extends State<MainRoom> {
+   @override
   void initState() {
     context
         .read<CategoryBloc>()
         .add(FetchCategoryEvent(businessId: widget.businessId));
-    context.read<FoodBloc>().add(FetchFoodEvent(businessId: widget.businessId));
+    context.read<ManageRoomBloc>().add(FetchsRoomEvent(businessId: widget.businessId));
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'รายการอาหาร',
+          'รายการห้องพัก',
           style: TextStyle(color: AppConstant.colorTextHeader),
         ),
         backgroundColor: AppConstant.themeApp,
@@ -46,13 +40,12 @@ class _MainFoodState extends State<MainFood> {
           HeaderCreateAndEdit(
             businessId: widget.businessId,
             token: widget.token,
-            createProduct: CreateFood(
-              businessId: widget.businessId,
+            createProduct: CreateRoom(
               token: widget.token,
             ),
-            type: 'อาหาร',
+            type: 'ห้องพัก',
           ),
-          FoodInCategory(
+          RoomInCategory(
             token: widget.token,
           ),
         ],

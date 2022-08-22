@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/models/activity_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/round_models.dart';
-import 'package:chonburi_mobileapp/utils/services/order_package_service.dart';
 import 'package:chonburi_mobileapp/utils/services/package_service.dart';
 import 'package:chonburi_mobileapp/utils/services/upload_file_service.dart';
 import 'package:equatable/equatable.dart';
@@ -475,6 +474,4 @@ class ManagePackageBloc extends Bloc<ManagePackageEvent, ManagePackageState> {
       ),
     );
   }
-
-  
 }

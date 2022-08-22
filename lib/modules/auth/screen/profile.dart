@@ -165,7 +165,7 @@ class _ProfileState extends State<Profile> {
                             lastName: '',
                             roles: 'guest',
                             token: '',
-                            tokenDevice: '',
+                            tokenDevice: state.user.tokenDevice,
                             profileRef: '',
                           );
                           context.read<UserBloc>().add(

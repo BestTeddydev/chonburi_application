@@ -1,29 +1,29 @@
 import 'package:chonburi_mobileapp/modules/category/bloc/category_bloc.dart';
 import 'package:chonburi_mobileapp/modules/category/models/category_model.dart';
-import 'package:chonburi_mobileapp/modules/food/bloc/food_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/models/food_model.dart';
-import 'package:chonburi_mobileapp/modules/food/screen/edit_food.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/bloc/manage_room_bloc.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/models/room_models.dart';
+import 'package:chonburi_mobileapp/modules/manage_room/screen/edit_room.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FoodInCategory extends StatefulWidget {
+class RoomInCategory extends StatefulWidget {
   final String token;
-  const FoodInCategory({
+  const RoomInCategory({
     Key? key,
     required this.token,
   }) : super(key: key);
 
   @override
-  State<FoodInCategory> createState() => _FoodInCategoryState();
+  State<RoomInCategory> createState() => _RoomInCategoryState();
 }
 
-class _FoodInCategoryState extends State<FoodInCategory> {
+class _RoomInCategoryState extends State<RoomInCategory> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return BlocBuilder<FoodBloc, FoodState>(
+    return BlocBuilder<ManageRoomBloc, ManageRoomState>(
       builder: (context, state) {
         return BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, stateCategory) {
@@ -33,7 +33,7 @@ class _FoodInCategoryState extends State<FoodInCategory> {
               itemCount: stateCategory.categories.length,
               itemBuilder: (context, index) {
                 CategoryModel categoryModel = stateCategory.categories[index];
-                List<FoodModel> foods = state.foods
+                List<RoomModel> rooms = state.rooms
                     .where(
                       (element) => element.categoryId == categoryModel.id,
                     )
@@ -47,9 +47,9 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: foods.length,
-                        itemBuilder: (context, indexFood) {
-                          FoodModel food = foods[indexFood];
+                        itemCount: rooms.length,
+                        itemBuilder: (context, indexProduct) {
+                          RoomModel room = rooms[indexProduct];
                           return Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -58,10 +58,10 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (builder) => EditFood(
-                                    food: food,
-                                    token: widget.token,
+                                  builder: (builder) => EditRoom(
                                     category: categoryModel,
+                                    room: room,
+                                    token: widget.token,
                                   ),
                                 ),
                               ),
@@ -74,22 +74,22 @@ class _FoodInCategoryState extends State<FoodInCategory> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: ShowImageNetwork(
-                                        pathImage: food.imageRef,
+                                        pathImage: room.imageCover,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    width: width * 0.6,
+                                    width: width * 0.5,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         TextCustom(
-                                          title: food.foodName,
+                                          title: room.roomName,
                                           maxLine: 2,
                                         ),
                                         TextCustom(
-                                          title: '${food.price} ฿',
+                                          title: '${room.price} ฿',
                                         ),
                                       ],
                                     ),

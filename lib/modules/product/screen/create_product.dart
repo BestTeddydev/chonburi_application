@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/category/bloc/category_bloc.dart';
 import 'package:chonburi_mobileapp/modules/category/screen/select_category.dart';
-import 'package:chonburi_mobileapp/modules/food/bloc/food_bloc.dart';
-import 'package:chonburi_mobileapp/modules/food/models/food_model.dart';
+import 'package:chonburi_mobileapp/modules/product/bloc/product_bloc.dart';
+import 'package:chonburi_mobileapp/modules/product/models/product_models.dart';
 import 'package:chonburi_mobileapp/widget/dialog_camera.dart';
 import 'package:chonburi_mobileapp/widget/dialog_error.dart';
 import 'package:chonburi_mobileapp/widget/dialog_loading.dart';
@@ -14,23 +14,27 @@ import 'package:chonburi_mobileapp/widget/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateFood extends StatefulWidget {
+class CreateProduct extends StatefulWidget {
   final String token, businessId;
-  const CreateFood({
+  const CreateProduct({
     Key? key,
     required this.businessId,
     required this.token,
   }) : super(key: key);
 
   @override
-  State<CreateFood> createState() => _CreateFoodState();
+  State<CreateProduct> createState() => _CreateProductState();
 }
 
-class _CreateFoodState extends State<CreateFood> {
+class _CreateProductState extends State<CreateProduct> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController foodNameController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController widthtController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController longController = TextEditingController();
 
   @override
   void initState() {
@@ -38,8 +42,8 @@ class _CreateFoodState extends State<CreateFood> {
     super.initState();
   }
 
-  onSelectImageFood(File image) {
-    context.read<FoodBloc>().add(SelectImageFoodEvent(imageRef: image));
+  onSelectImageProduct(File image) {
+    context.read<ProductBloc>().add(SelectImageProductEvent(imageRef: image));
   }
 
   @override
@@ -49,13 +53,13 @@ class _CreateFoodState extends State<CreateFood> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'สร้างข้อมูลอาหาร',
+          'สร้างข้อมูลสินค้าโอท็อป',
           style: TextStyle(color: AppConstant.colorTextHeader),
         ),
         backgroundColor: AppConstant.themeApp,
         iconTheme: IconThemeData(color: AppConstant.colorTextHeader),
       ),
-      body: BlocListener<FoodBloc, FoodState>(
+      body: BlocListener<ProductBloc, ProductState>(
         listener: (context, state) {
           if (state.loading) {
             showDialog(
@@ -78,7 +82,7 @@ class _CreateFoodState extends State<CreateFood> {
             );
           }
         },
-        child: BlocBuilder<FoodBloc, FoodState>(
+        child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             return GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -96,9 +100,9 @@ class _CreateFoodState extends State<CreateFood> {
                               width: width * 0.7,
                               margin: const EdgeInsets.all(10),
                               child: TextFormFieldCustom(
-                                controller: foodNameController,
-                                labelText: 'ชื่ออาหาร',
-                                requiredText: 'กรุณากรอกชื่ออาหาร',
+                                controller: productNameController,
+                                labelText: 'ชื่อสินค้า',
+                                requiredText: 'กรุณากรอกชื่อสินค้า',
                               ),
                             ),
                             Container(
@@ -108,6 +112,46 @@ class _CreateFoodState extends State<CreateFood> {
                                 controller: priceController,
                                 labelText: 'ราคา',
                                 requiredText: 'กรุณากรอกราคา',
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                            Container(
+                              width: width * 0.7,
+                              margin: const EdgeInsets.all(10),
+                              child: TextFormFieldCustom(
+                                controller: weightController,
+                                labelText: 'น้ำหนัก กม.',
+                                requiredText: 'กรุณากรอกน้ำหนัก',
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                            Container(
+                              width: width * 0.7,
+                              margin: const EdgeInsets.all(10),
+                              child: TextFormFieldCustom(
+                                controller: heightController,
+                                labelText: 'ความสูง(ซม.)',
+                                requiredText: 'กรุณากรอกความสูง',
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                            Container(
+                              width: width * 0.7,
+                              margin: const EdgeInsets.all(10),
+                              child: TextFormFieldCustom(
+                                controller: widthtController,
+                                labelText: 'ความกว้าง(ซม.)',
+                                requiredText: 'กรุณากรอกความกว้าง',
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                            Container(
+                              width: width * 0.7,
+                              margin: const EdgeInsets.all(10),
+                              child: TextFormFieldCustom(
+                                controller: longController,
+                                labelText: 'ความยาว(ซม.)',
+                                requiredText: 'กรุณากรอกความยาว',
                                 textInputType: TextInputType.number,
                               ),
                             ),
@@ -154,9 +198,9 @@ class _CreateFoodState extends State<CreateFood> {
                               decoration: BoxDecoration(
                                 color: AppConstant.bgTextFormField,
                               ),
-                              child: state.imageFood.path.isNotEmpty
+                              child: state.imageProduct.path.isNotEmpty
                                   ? Image.file(
-                                      state.imageFood,
+                                      state.imageProduct,
                                       fit: BoxFit.fill,
                                     )
                                   : Center(
@@ -175,7 +219,7 @@ class _CreateFoodState extends State<CreateFood> {
                               child: ElevatedButton(
                                 onPressed: () => dialogCamera(
                                   context,
-                                  onSelectImageFood,
+                                  onSelectImageProduct,
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   primary: AppConstant.bgTextFormField,
@@ -195,7 +239,7 @@ class _CreateFoodState extends State<CreateFood> {
                                       ),
                                     ),
                                     Text(
-                                      'เพิ่มรูปภาพอาหาร',
+                                      'เพิ่มรูปภาพสินค้า',
                                       style: TextStyle(
                                         fontSize: 10,
                                         color: AppConstant.colorText,
@@ -211,22 +255,27 @@ class _CreateFoodState extends State<CreateFood> {
                                 if (_formKey.currentState!.validate() &&
                                     categoryState
                                         .selectedCategory.id.isNotEmpty) {
-                                  FoodModel foodModel = FoodModel(
+                                  ProductModel productModel = ProductModel(
                                     id: '',
-                                    foodName: foodNameController.text,
+                                    productName: productNameController.text,
                                     price: double.parse(priceController.text),
                                     imageRef: '',
                                     businessId: widget.businessId,
                                     categoryId:
                                         categoryState.selectedCategory.id,
                                     description: descriptionController.text,
-                                    status: 1,
+                                    status: true,
+                                    height: double.parse(heightController.text),
+                                    long: double.parse(longController.text),
+                                    weight: double.parse(weightController.text),
+                                    width: double.parse(
+                                      widthtController.text,
+                                    ),
                                   );
-                                  context.read<FoodBloc>().add(
-                                        CreateFoodEvent(
-                                          token: widget.token,
-                                          foodModel: foodModel,
-                                        ),
+                                  context.read<ProductBloc>().add(
+                                        CreateProductEvent(
+                                            token: widget.token,
+                                            productModel: productModel),
                                       );
                                 } else {
                                   showDialog(
@@ -241,7 +290,7 @@ class _CreateFoodState extends State<CreateFood> {
                                 primary: AppConstant.themeApp,
                               ),
                               child: const TextCustom(
-                                title: 'สร้างข้อมูลอาหาร',
+                                title: 'สร้างข้อมูลสินค้า',
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
                               ),
