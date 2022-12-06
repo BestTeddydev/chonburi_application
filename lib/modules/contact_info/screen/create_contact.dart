@@ -137,11 +137,12 @@ class _CreateContactState extends State<CreateContact> {
                             Container(
                               margin: const EdgeInsets.all(10),
                               width: width * 0.8,
-                              height: 40,
+                              height: 80,
                               child: TextFormFieldCustom(
                                 controller: addressController,
                                 requiredText: 'กรุณากรอกรายละเอียดที่อยู่',
                                 labelText: 'รายละเอียดที่อยู่',
+                                maxLines: 3,
                               ),
                             ),
                             const Center(

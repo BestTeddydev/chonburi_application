@@ -14,6 +14,11 @@ class AppConstant {
   static String rejectStatus = 'ปฏิเสธ';
   static String pay = 'รอการชำระเงิน';
   static String payed = 'ชำระเงินแล้ว';
+  static String payPrePaid = "PAY_PREPAID";
+  static String approve = "APPROVE";
+  static String reject = "REJECT";
+  static String payedOrder = "PAYED";
+  static String shipping = "SHIPPING";
 
   static Map<String, String> tripsType = {
     "zero": 'เลือกประเภทแพ็คเกจ',
@@ -54,5 +59,13 @@ class AppConstant {
     rejectStatus: bgCancelActivity,
     pay: const Color.fromRGBO(85, 150, 225, 1),
     payed: const Color.fromRGBO(85, 192, 95, 1)
+  };
+
+  static Map<String,String> translateStatus = {
+    payPrePaid: "ชำระเงินล่วงหน้า", // ยูสเซอร์ชำระเงินมาครึ่งนึงก่อน
+    approve:"รับทราบการชำระเงิน", // ร้านตกลงที่จะทำการค้า
+    reject:"ปฏิเสธการชำระเงิน", // ร้านปฏิเสธออเดอร์
+    payedOrder:"ชำระเงินทั้งหมดเรียบร้อยแล้ว", // ลูกค้าชำระเงินที่เหลือ
+    shipping:"จัดส่งสินค้า", // ร้านค้าทำการจัดส่ง
   };
 }

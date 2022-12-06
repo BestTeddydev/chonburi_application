@@ -1,7 +1,9 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/auth/screen/login.dart';
 import 'package:chonburi_mobileapp/modules/contact_info/models/contact_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/models/activity_model.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 
 dialogConfirmActivity(BuildContext context, OrderActivityModel activityModel,
@@ -15,14 +17,7 @@ dialogConfirmActivity(BuildContext context, OrderActivityModel activityModel,
           Icons.error,
           color: AppConstant.bgHastag,
         ),
-        subtitle: Text(
-          message,
-          style: TextStyle(
-            fontSize: 14,
-            color: AppConstant.colorText,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        subtitle: TextCustom(title: message),
       ),
       children: <Widget>[
         Container(
@@ -39,12 +34,10 @@ dialogConfirmActivity(BuildContext context, OrderActivityModel activityModel,
                   primary: AppConstant.bgChooseActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยืนยัน',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยืนยัน',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
               ElevatedButton(
@@ -53,12 +46,10 @@ dialogConfirmActivity(BuildContext context, OrderActivityModel activityModel,
                   primary: AppConstant.bgCancelActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยกเลิก',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
             ],
@@ -68,6 +59,7 @@ dialogConfirmActivity(BuildContext context, OrderActivityModel activityModel,
     ),
   );
 }
+
 dialogApproveActivity(BuildContext context, ActivityModel activityModel,
     String message, Function onOk, String packageID) {
   showDialog(
@@ -79,14 +71,7 @@ dialogApproveActivity(BuildContext context, ActivityModel activityModel,
           Icons.error,
           color: AppConstant.bgHastag,
         ),
-        subtitle: Text(
-          message,
-          style: TextStyle(
-            fontSize: 14,
-            color: AppConstant.colorText,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        subtitle: TextCustom(title: message),
       ),
       children: <Widget>[
         Container(
@@ -103,12 +88,10 @@ dialogApproveActivity(BuildContext context, ActivityModel activityModel,
                   primary: AppConstant.bgChooseActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยืนยัน',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยิืนยัน',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
               ElevatedButton(
@@ -117,12 +100,10 @@ dialogApproveActivity(BuildContext context, ActivityModel activityModel,
                   primary: AppConstant.bgCancelActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยกเลิก',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
             ],
@@ -133,7 +114,7 @@ dialogApproveActivity(BuildContext context, ActivityModel activityModel,
   );
 }
 
-dialogWarningLogin(BuildContext context, Function onOk) {
+dialogWarningLogin(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => SimpleDialog(
@@ -143,14 +124,11 @@ dialogWarningLogin(BuildContext context, Function onOk) {
           Icons.error,
           color: AppConstant.bgHastag,
         ),
-        subtitle: Text(
-          'ไม่สามารถเข้าใช้บริการได้เนื่องจากท่านยังไม่เข้าสู่ระบบกรุณาเข้าสู่ระบบ',
-          style: TextStyle(
-            fontSize: 14,
-            color: AppConstant.colorText,
-            fontWeight: FontWeight.w600,
-            fontFamily: 'Roboto',
-          ),
+        subtitle: const TextCustom(
+          title:
+              'ไม่สามารถเข้าใช้บริการได้เนื่องจากท่านยังไม่เข้าสู่ระบบกรุณาเข้าสู่ระบบ',
+          fontSize: 14,
+          maxLine: 2,
         ),
       ),
       children: <Widget>[
@@ -161,18 +139,22 @@ dialogWarningLogin(BuildContext context, Function onOk) {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  onOk(context);
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (builder) => const AuthenLogin(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: AppConstant.bgHasTaged,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'เข้าสู่ระบบ',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'เข้าสู่ระบบ',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
               ElevatedButton(
@@ -181,12 +163,10 @@ dialogWarningLogin(BuildContext context, Function onOk) {
                   primary: AppConstant.bgCancelActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยกเลิก',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
             ],
@@ -208,15 +188,10 @@ dialogConfirmContact(
           Icons.error,
           color: AppConstant.bgHastag,
         ),
-        subtitle: Center(
-          child: Text(
-            'คุณต้องการเปลี่ยนข้อมูลติดต่อเบื้องต้นใช่หรือไม่',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppConstant.colorText,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Roboto',
-            ),
+        subtitle: const Center(
+          child: TextCustom(
+            title: 'คุณต้องการเปลี่ยนข้อมูลติดต่อเบื้องต้นใช่หรือไม่',
+            fontSize: 14,
           ),
         ),
       ),
@@ -235,13 +210,8 @@ dialogConfirmContact(
                   primary: AppConstant.bgHasTaged,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยืนยัน',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                child: const TextCustom(
+                    title: 'ยืนยัน', fontSize: 12, fontColor: Colors.white),
               ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
@@ -249,12 +219,10 @@ dialogConfirmContact(
                   primary: AppConstant.bgCancelActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยกเลิก',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
             ],
@@ -264,7 +232,6 @@ dialogConfirmContact(
     ),
   );
 }
-
 
 dialogConfirm(BuildContext context, Function onOk, String message) {
   showDialog(
@@ -277,14 +244,8 @@ dialogConfirm(BuildContext context, Function onOk, String message) {
           color: AppConstant.bgHastag,
         ),
         subtitle: Center(
-          child: Text(
-            message,
-            style: TextStyle(
-              fontSize: 14,
-              color: AppConstant.colorText,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Roboto',
-            ),
+          child: TextCustom(
+            title: message,
           ),
         ),
       ),
@@ -303,12 +264,10 @@ dialogConfirm(BuildContext context, Function onOk, String message) {
                   primary: AppConstant.bgHasTaged,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยืนยัน',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยืนยัน',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
               ElevatedButton(
@@ -317,12 +276,10 @@ dialogConfirm(BuildContext context, Function onOk, String message) {
                   primary: AppConstant.bgCancelActivity,
                   shadowColor: AppConstant.backgroudApp,
                 ),
-                child: const Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: const TextCustom(
+                  title: 'ยกเลิก',
+                  fontSize: 12,
+                  fontColor: Colors.white,
                 ),
               ),
             ],

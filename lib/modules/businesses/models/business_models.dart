@@ -6,7 +6,7 @@ class BusinessModel {
   String address;
   double latitude;
   double longitude;
-  double statusOpen;
+  bool statusOpen;
   double ratingCount;
   double point;
   String paymentNumber;
@@ -45,7 +45,7 @@ class BusinessModel {
     String? address,
     double? latitude,
     double? longitude,
-    double? statusOpen,
+    bool? statusOpen,
     double? ratingCount,
     double? point,
     String? paymentNumber,
@@ -80,7 +80,28 @@ class BusinessModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      // 'id': id,
+      'businessName': businessName,
+      'sellerId': sellerId,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'statusOpen': statusOpen,
+      'ratingCount': ratingCount,
+      'point': point,
+      'paymentNumber': paymentNumber,
+      'qrcodeRef': qrcodeRef,
+      'phoneNumber': phoneNumber,
+      'imageRef': imageRef,
+      'ratePrice': ratePrice,
+      'typeBusiness': typeBusiness,
+      'typePayment': typePayment,
+      'introduce': introduce,
+    };
+  }
+
+  Map<String, dynamic> toMapWithId() {
+    return <String, dynamic>{
+      "_id":id,
       'businessName': businessName,
       'sellerId': sellerId,
       'address': address,
@@ -108,7 +129,7 @@ class BusinessModel {
       address: map['address'],
       latitude: map['latitude']?.toDouble(),
       longitude: map['longitude']?.toDouble(),
-      statusOpen: map['statusOpen']?.toDouble(),
+      statusOpen: map['statusOpen'],
       ratingCount: map['ratingCount']?.toDouble(),
       point: map['point']?.toDouble(),
       paymentNumber: map['paymentNumber'],

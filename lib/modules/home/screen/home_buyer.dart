@@ -2,6 +2,8 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/screen/home_package.dart';
 import 'package:chonburi_mobileapp/modules/home/screen/components/menu_card_admin.dart';
+import 'package:chonburi_mobileapp/modules/otop/screen/otops.dart';
+import 'package:chonburi_mobileapp/modules/restaurant/screen/restaurants.dart';
 import 'package:chonburi_mobileapp/widget/warning.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +21,12 @@ class HomeBuyer extends StatelessWidget {
       {
         "title": 'ร้านอาหาร',
         "pathImage": AppConstantAssets.foogImage,
-        "goWidget": const WarningDeveloping(),
+        "goWidget": const Restaurants(),
       },
       {
         "title": 'สินค้า OTOP',
         "pathImage": AppConstantAssets.otopImage,
-        "goWidget": const WarningDeveloping(),
+        "goWidget": const Otops(),
       },
       {
         "title": 'บ้านพัก',
@@ -101,54 +103,5 @@ class HomeBuyer extends StatelessWidget {
         ),
       ),
     );
-    // Scaffold(
-    //   body: Responsive(
-    //     desktop: Center(
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: [
-    //           const Text("Home Buyer Desktop"),
-    //           ElevatedButton(
-    //             onPressed: () => Navigator.push(
-    //               context,
-    //               MaterialPageRoute(
-    //                 builder: (builder) => const CustomPackage(),
-    //               ),
-    //             ),
-    //             child: const Text('go to custom package'),
-    //           )
-    //         ],
-    //       ),
-    //     ),
-    //     mobile: Column(
-    //       children: [
-    //         const Text("Home Buyer Mobile"),
-    //         ElevatedButton(
-    //           onPressed: () => Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //               builder: (builder) => const HomePackages(),
-    //             ),
-    //           ),
-    //           child: const Text('go to custom package'),
-    //         )
-    //       ],
-    //     ),
-    //     tablet: Column(
-    //       children: [
-    //         const Text("Home Buyer Tablet"),
-    //         ElevatedButton(
-    //           onPressed: () => Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //               builder: (builder) => const HomePackages(),
-    //             ),
-    //           ),
-    //           child: const Text('go to custom package'),
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

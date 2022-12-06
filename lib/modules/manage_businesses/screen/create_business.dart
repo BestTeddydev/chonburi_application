@@ -295,7 +295,7 @@ class _CreateBusinessState extends State<CreateBusiness> {
                                   address: addressController.text,
                                   latitude: locationState.curLat,
                                   longitude: locationState.curLng,
-                                  statusOpen: 1,
+                                  statusOpen: true,
                                   ratingCount: 0,
                                   point: 0,
                                   paymentNumber: paymentController.text,

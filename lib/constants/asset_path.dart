@@ -12,4 +12,5 @@ class AppConstantAssets {
   static String placeImage = 'images/place.png';
   static String packageImage = 'images/package.png';
   static String logoImage = 'images/takhientia.png';
+  static String promptPayImage = 'images/promptpay.jpeg';
 }

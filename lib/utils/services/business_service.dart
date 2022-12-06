@@ -4,9 +4,11 @@ import 'package:dio/dio.dart';
 
 class BusinessService {
   static Future<List<BusinessModel>> fetchBusiness(
-      String businessName, String typeBusiness) async {
+      String search, String typeBusiness) async {
     List<BusinessModel> businesses = [];
-    Response response = await DioService.dioGet('/guest/business');
+    Response response = await DioService.dioGet(
+      '/guest/business?typeBusiness=$typeBusiness&search=$search',
+    );
     for (var business in response.data) {
       BusinessModel businessModel = BusinessModel.fromMap(business);
       businesses.add(businessModel);

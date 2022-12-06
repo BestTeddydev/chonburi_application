@@ -4,6 +4,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/home/screen/home_admin.dart';
 import 'package:chonburi_mobileapp/modules/auth/screen/profile.dart';
+import 'package:chonburi_mobileapp/modules/notification/screen/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +33,7 @@ class _AdminServiceState extends State<AdminService> {
           body: SafeArea(
             child: [
               HomeAdmin(token: state.user.token),
+              MyNotification(recipientId: state.user.userId),
               const Profile(),
             ][_selected],
           ),
@@ -39,15 +41,19 @@ class _AdminServiceState extends State<AdminService> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: 'หน้าแรก',
               ),
               // BottomNavigationBarItem(
               //   icon: Icon(Icons.list_alt),
               //   label: 'Order',
               // ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.notifications_active),
+                label: 'แจ้งเตือน',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: 'Profile',
+                label: 'ตั้งค่า',
               ),
             ],
             onTap: _onItemTapped,

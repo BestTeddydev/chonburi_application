@@ -47,16 +47,6 @@ class _PackageDetailState extends State<PackageDetail> {
     return images.toSet().toList();
   }
 
-  goToLogin(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (builder) => const AuthenLogin(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -93,9 +83,6 @@ class _PackageDetailState extends State<PackageDetail> {
                       height: height,
                       imagesActivity: imagesActivity,
                     ),
-                    // BlocBuilder<ActivityBloc, ActivityState>(
-                    // builder: (context, stateActivity) {
-                    //   return
                     DayListComponent(
                       context: context,
                       packageTour: packageTour,
@@ -105,8 +92,7 @@ class _PackageDetailState extends State<PackageDetail> {
                       roundLength: roundLength,
                       totalPerson: stateActivity.totalMember,
                     ),
-                    //   },
-                    // ),
+     
                     BlocBuilder<UserBloc, UserState>(
                       builder: (context, stateUser) {
                         UserModel userModel = stateUser.user;
@@ -119,7 +105,6 @@ class _PackageDetailState extends State<PackageDetail> {
                                     if (userModel.token.isEmpty) {
                                       dialogWarningLogin(
                                         context,
-                                        goToLogin,
                                       );
                                       return;
                                     }

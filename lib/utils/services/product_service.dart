@@ -5,7 +5,8 @@ import 'package:dio/dio.dart';
 class ProductService {
   static Future<List<ProductModel>> fetchsProduct(String businessId) async {
     List<ProductModel> products = [];
-    Response response = await DioService.dioGet('/guest/products?businessId=$businessId');
+    Response response =
+        await DioService.dioGet('/guest/products?businessId=$businessId');
     for (var product in response.data) {
       ProductModel productModel = ProductModel.fromMap(product);
       products.add(productModel);
@@ -13,7 +14,18 @@ class ProductService {
     return products;
   }
 
-  static Future<ProductModel> createProduct(String token, ProductModel productModel) async {
+  static Future<List<ProductModel>> fetchsIntroductsProduct() async {
+    List<ProductModel> products = [];
+    Response response = await DioService.dioGet('/guest/introduce/products');
+    for (var product in response.data) {
+      ProductModel productModel = ProductModel.fromMap(product);
+      products.add(productModel);
+    }
+    return products;
+  }
+
+  static Future<ProductModel> createProduct(
+      String token, ProductModel productModel) async {
     Response response = await DioService.dioPostAuthen(
       '/product',
       token,
@@ -23,11 +35,13 @@ class ProductService {
     return food;
   }
 
-  static Future<void> editProduct(String token,ProductModel productModel) async {
-    await DioService.dioPut('/product/${productModel.id}', token, productModel.toMap());
+  static Future<void> editProduct(
+      String token, ProductModel productModel) async {
+    await DioService.dioPut(
+        '/product/${productModel.id}', token, productModel.toMap());
   }
 
-  static Future<void> deleteProduct(String token ,String docId) async {
+  static Future<void> deleteProduct(String token, String docId) async {
     await DioService.dioDelete('/product/$docId', token);
   }
 }

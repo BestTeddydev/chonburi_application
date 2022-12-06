@@ -1,12 +1,13 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextCustom extends StatelessWidget {
   final String title;
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? fontColor;
-  final int ? maxLine;
+  final int? maxLine;
   const TextCustom({
     Key? key,
     this.fontColor,
@@ -23,10 +24,12 @@ class TextCustom extends StatelessWidget {
       softWrap: true,
       maxLines: maxLine ?? 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        color: fontColor ?? AppConstant.colorText,
-        fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.w500,
+      style: GoogleFonts.sarabun(
+        textStyle: TextStyle(
+          color: fontColor ?? AppConstant.colorText,
+          fontSize: fontSize ?? 14,
+          fontWeight: fontWeight ?? FontWeight.w500,
+        ),
       ),
     );
   }

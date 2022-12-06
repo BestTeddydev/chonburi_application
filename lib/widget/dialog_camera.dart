@@ -59,7 +59,6 @@ dialogCamera(BuildContext context, Function fStateFile) {
                   style: TextStyle(
                     fontSize: 16,
                     color: AppConstant.bgbutton,
-                    // fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -79,7 +78,6 @@ dialogCamera(BuildContext context, Function fStateFile) {
                   style: TextStyle(
                     fontSize: 16,
                     color: AppConstant.bgbutton,
-                    // fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

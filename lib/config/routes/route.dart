@@ -9,7 +9,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 class Routes {
   static Map<String, WidgetBuilder> protectRoute = {
     "/authen": (context) => const AuthenLogin(),
-    "/buyerService": (context) => const BuyerService(),
+    "/buyerService": (context) => const BuyerService(token: '',),
     '/adminService': (context) => const AdminService(),
     '/sellerService': (context) => const HomeSellerService(),
     '/home': (context) => const HomeSplash(),
@@ -26,7 +26,7 @@ class Routes {
         dateNow.hour + 2,
       );
       if (hasExpired.compareTo(limitExpired) < 0) {
-        return const AuthenLogin();
+        return  BuyerService(token: token,);
       }
     }
 
@@ -37,9 +37,9 @@ class Routes {
       return const HomeSellerService();
     }
     if (role == "buyer") {
-      return const BuyerService();
+      return  BuyerService(token: token,);
     }
-    return const BuyerService();
+    return  BuyerService(token: token,);
   }
 
   // static String initialRoute(String role, String token) {

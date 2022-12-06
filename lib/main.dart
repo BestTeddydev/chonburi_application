@@ -1,6 +1,10 @@
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_room/bloc/manage_room_bloc.dart';
+import 'package:chonburi_mobileapp/modules/order_otop/bloc/order_otop_bloc.dart';
+import 'package:chonburi_mobileapp/modules/otop/bloc/otop_bloc.dart';
 import 'package:chonburi_mobileapp/modules/product/bloc/product_bloc.dart';
+import 'package:chonburi_mobileapp/modules/restaurant/bloc/restaurant_bloc.dart';
+import 'package:chonburi_mobileapp/modules/tracking_order_otop/bloc/tracking_order_otop_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +61,10 @@ void main() async {
           BlocProvider(create: (context) => ManagePartnerBloc()),
           BlocProvider(create: (context) => ProductBloc()),
           BlocProvider(create: (context) => ManageRoomBloc()),
+          BlocProvider(create: (context) => RestaurantBloc()),
+          BlocProvider(create: (context) => OtopBloc()),
+          BlocProvider(create: (context) => TrackingOrderOtopBloc()),
+          BlocProvider(create: (context) => OrderOtopBloc()),
         ],
         child: const MyApp(),
       ),

@@ -28,7 +28,7 @@ class BusinessesState extends Equatable {
               address: '',
               latitude: 0,
               longitude: 0,
-              statusOpen: 1,
+              statusOpen: true,
               ratingCount: 0,
               point: 0,
               paymentNumber: '',

@@ -1,7 +1,9 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/auth/models/user_model.dart';
+import 'package:chonburi_mobileapp/modules/contact_info/screen/contact_list.dart';
 import 'package:chonburi_mobileapp/modules/register/screen/register.dart';
+import 'package:chonburi_mobileapp/modules/tracking_order_otop/screens/tracking_orders.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,7 @@ class _ProfileState extends State<Profile> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Center(
               child: Text(
                 'บัญชีของฉัน',
@@ -107,7 +110,8 @@ class _ProfileState extends State<Profile> {
                               shape: BoxShape.circle,
                             ),
                             child: ShowImageNetwork(
-                                pathImage: state.user.profileRef),
+                              pathImage: state.user.profileRef,
+                            ),
                           ),
                           SizedBox(
                             width: width * 0.7,
@@ -128,30 +132,82 @@ class _ProfileState extends State<Profile> {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: width * 0.1,
-                            child: Icon(
-                              Icons.pin_drop_sharp,
-                              color: AppConstant.colorText,
+                      child: state.user.roles == "buyer"
+                          ? TextButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => ContactList(
+                                    token: state.user.token,
+                                    userId: state.user.userId,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Icon(
+                                      Icons.pin_drop_sharp,
+                                      color: AppConstant.colorText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.76,
+                                    child: Text(
+                                      'ที่อยู่ของฉัน',
+                                      style: TextStyle(
+                                        color: AppConstant.colorText,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppConstant.colorText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (builder) => TrackingOrderOtop(
+                              token: state.user.token,
+                              userId: state.user.userId,
                             ),
                           ),
-                          SizedBox(
-                            width: width * 0.76,
-                            child: Text(
-                              'ที่อยู่ของฉัน',
-                              style: TextStyle(
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: width * 0.1,
+                              child: Icon(
+                                Icons.delivery_dining_rounded,
                                 color: AppConstant.colorText,
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppConstant.colorText,
-                            size: 16,
-                          ),
-                        ],
+                            SizedBox(
+                              width: width * 0.76,
+                              child: Text(
+                                'ติดตามสินค้าโอท็อปของฉัน',
+                                style: TextStyle(
+                                  color: AppConstant.colorText,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppConstant.colorText,
+                              size: 16,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(

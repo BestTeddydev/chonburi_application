@@ -51,10 +51,10 @@ class _HomeBusinessState extends State<HomeBusiness> {
             label: 'กิจกรรม',
           ),
 
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.reorder),
-          //   label: 'ออร์เดอร์',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.reorder),
+            label: 'ออร์เดอร์',
+          ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.auto_graph),
           //   label: 'สถิติ',

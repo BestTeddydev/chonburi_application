@@ -34,6 +34,7 @@ class _MyNotificationState extends State<MyNotification> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'การแจ้งเตือน',
           style: TextStyle(color: AppConstant.colorText),
@@ -47,66 +48,79 @@ class _MyNotificationState extends State<MyNotification> {
           List<NotificationModel> notifications = state.notifications;
           return BlocBuilder<UserBloc, UserState>(
             builder: (context, stateUser) {
-              return SingleChildScrollView(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: notifications.length,
-                  itemBuilder: (itemBuilder, index) {
-                    return Card(
-                      color: const Color.fromRGBO(243, 251, 255, 1),
-                      margin: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: width * 0.16,
-                            height: height * 0.08,
+              return notifications.isNotEmpty
+                  ? SingleChildScrollView(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: notifications.length,
+                        itemBuilder: (itemBuilder, index) {
+                          return Card(
+                            color: const Color.fromRGBO(243, 251, 255, 1),
                             margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(216, 230, 237, 1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Icon(
-                              Icons.notifications_active,
-                              color: AppConstant.colorText,
-                            ),
-                          ),
-                          Container(
-                            width: width * 0.54,
-                            margin: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                TextCustom(title: notifications[index].title),
-                                TextCustom(
-                                  title: notifications[index].message,
-                                  maxLine: 2,
+                                Container(
+                                  width: width * 0.16,
+                                  height: height * 0.08,
+                                  margin: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromRGBO(216, 230, 237, 1),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    Icons.notifications_active,
+                                    color: AppConstant.colorText,
+                                  ),
+                                ),
+                                Container(
+                                  width: width * 0.54,
+                                  margin: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextCustom(
+                                          title: notifications[index].title),
+                                      TextCustom(
+                                        title: notifications[index].message,
+                                        maxLine: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: stateUser.user.token.isNotEmpty
+                                      ? () {
+                                          context.read<NotificationBloc>().add(
+                                                DeleteNotificationEvent(
+                                                  docId:
+                                                      notifications[index].id,
+                                                  token: stateUser.user.token,
+                                                ),
+                                              );
+                                        }
+                                      : null,
+                                  icon: Icon(
+                                    Icons.delete_forever_outlined,
+                                    color: AppConstant.bgCancelActivity,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          IconButton(
-                            onPressed: stateUser.user.token.isNotEmpty
-                                ? () {
-                                    context.read<NotificationBloc>().add(
-                                          DeleteNotificationEvent(
-                                            docId: notifications[index].id,
-                                            token: stateUser.user.token,
-                                          ),
-                                        );
-                                  }
-                                : null,
-                            icon: Icon(
-                              Icons.delete_forever_outlined,
-                              color: AppConstant.bgCancelActivity,
-                            ),
-                          ),
+                          );
+                        },
+                      ),
+                    )
+                  : Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          TextCustom(title: 'ไม่มีการแจ้งเตือน')
                         ],
                       ),
                     );
-                  },
-                ),
-              );
             },
           );
         },

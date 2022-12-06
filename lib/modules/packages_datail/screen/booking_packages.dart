@@ -203,7 +203,8 @@ class _BookingPackagesState extends State<BookingPackages> {
                   ),
             contact: contactModel,
             orderActivities: state.buyActivity,
-            userId: userModel.userId, receiptImage: '',
+            userId: userModel.userId,
+            receiptImage: '',
           );
           context.read<OrderPackageBloc>().add(
                 CreateOrderPackageEvent(
