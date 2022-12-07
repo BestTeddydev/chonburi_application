@@ -26,6 +26,7 @@ class FirebaseMessagingService {
   getDeviceFirebaseToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
     if (token != null) {
+      log('token $token');
       userBloc.add(UpdateDeviceTokenEvent(token: token));
     }
   }

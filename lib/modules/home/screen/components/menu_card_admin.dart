@@ -23,6 +23,7 @@ class MenuCard extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox(
+              width: width * 1,
               height: double.maxFinite,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),

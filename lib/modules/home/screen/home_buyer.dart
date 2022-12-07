@@ -82,9 +82,7 @@ class HomeBuyer extends StatelessWidget {
                 width: width * 1,
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: height > 730
-                      ? width / height / 0.4
-                      : width / height / 0.6,
+                  childAspectRatio: width / height / 0.6,
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   children: List.generate(

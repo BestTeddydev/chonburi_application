@@ -49,15 +49,15 @@ class OrderOtopModel {
       id: map['_id'] ?? '',
       user: UserModel.fromMap(map['user']),
       contact: ContactModel.fromMap(map['contact']),
-      totalPrice: double.parse(map['totalPrice']),
-      prepaidPrice: double.parse(map['prepaidPrice']),
-      imagePayment: map['imagePayment'],
+      totalPrice: map['totalPrice'].toDouble() ?? 0,
+      prepaidPrice: map['prepaidPrice'].toDouble() ?? 0,
+      imagePayment: List.from(map['imagePayment']),
       business: BusinessModel.fromMap(map['business']),
       status: map['status'],
       reviewed: map['reviewed'] ?? '',
       product: List<ProductCartModel>.from(
           map['product'].map((x) => ProductCartModel.fromMap(x))),
-      shippingPrice: double.parse(map['shippingPrice']),
+      shippingPrice: map['shippingPrice'].toDouble() ?? 0,
     );
   }
 }
