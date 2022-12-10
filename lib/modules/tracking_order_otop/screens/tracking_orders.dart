@@ -98,6 +98,7 @@ class _TrackingOrderOtopState extends State<TrackingOrderOtop> {
                                       borderRadius: BorderRadius.circular(6),
                                       child: ShowImageNetwork(
                                         pathImage: order.business.imageRef,
+                                        boxFit: BoxFit.cover,
                                       ),
                                     ),
                                   ),

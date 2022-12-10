@@ -2,7 +2,9 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/widget/album_picture.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
+
 class AlbumActivity extends StatelessWidget {
   const AlbumActivity({
     Key? key,
@@ -27,22 +29,18 @@ class AlbumActivity extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              packageTour.packageName,
-              style: TextStyle(
-                color: AppConstant.colorTextHeader,
-                fontSize: 16,
-              ),
+            child: TextCustom(
+              title: packageTour.packageName,
+              fontSize: 16,
             ),
           ),
-          Text(
-            packageTour.introduce,
-            softWrap: true,
-            maxLines: 6,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: AppConstant.colorText,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [TextCustom(title: '${packageTour.price}/ท่าน')],
+          ),
+          TextCustom(
+            title: packageTour.description,
+            maxLine: 6,
           ),
           Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8),
@@ -52,9 +50,7 @@ class AlbumActivity extends StatelessWidget {
               shrinkWrap: true,
               physics: const ScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: imagesActivity.length > 3
-                  ? 4
-                  : imagesActivity.length,
+              itemCount: imagesActivity.length > 3 ? 4 : imagesActivity.length,
               itemBuilder: (itemBuilder, index) {
                 return Container(
                   margin: const EdgeInsets.all(5.0),
@@ -75,8 +71,7 @@ class AlbumActivity extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppConstant.bgActivityName,
-                              borderRadius:
-                                  BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(14),
                             ),
                             child: Center(
                                 child: Text(

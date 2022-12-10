@@ -1,5 +1,5 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/bloc/package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

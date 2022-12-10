@@ -1,6 +1,6 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/bloc/package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
 import 'package:flutter/material.dart';
 
 class BriefList extends StatelessWidget {

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
 class UrlLauncherMap extends StatelessWidget {
-  double lat, lng;
-  String businessName;
-  UrlLauncherMap(
+  final double lat, lng;
+  final String businessName;
+  const UrlLauncherMap(
       {Key? key,
       required this.lat,
       required this.lng,

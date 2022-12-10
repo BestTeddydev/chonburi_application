@@ -8,21 +8,21 @@ abstract class ActivityEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SelectCheckDate extends ActivityEvent {
-  final DateTime date;
-  const SelectCheckDate({required this.date});
-}
+// class SelectCheckDate extends ActivityEvent {
+//   final DateTime date;
+//   const SelectCheckDate({required this.date});
+// }
 
 class TotalMemberEmptyEvent extends ActivityEvent {}
 
-class FetchActivityEvent extends ActivityEvent {
-  final int totalMembers;
-  final String checkDate;
-  const FetchActivityEvent({
-    required this.totalMembers,
-    required this.checkDate,
-  });
-}
+// class FetchActivityEvent extends ActivityEvent {
+//   final int totalMembers;
+//   final String checkDate;
+//   const FetchActivityEvent({
+//     required this.totalMembers,
+//     required this.checkDate,
+//   });
+// }
 
 class SelectHasTagEvent extends ActivityEvent {
   final ActivitySelectedModel activitySelectedModel;
@@ -31,11 +31,11 @@ class SelectHasTagEvent extends ActivityEvent {
   });
 }
 
-class FetchsPackagesEvent extends ActivityEvent {
-  final List<String> activitiesID;
-  final String day;
-  const FetchsPackagesEvent({required this.activitiesID, required this.day});
-}
+// class FetchsPackagesEvent extends ActivityEvent {
+//   final List<String> activitiesID;
+//   final String day;
+//   const FetchsPackagesEvent({required this.activitiesID, required this.day});
+// }
 
 class ChangeTabEvent extends ActivityEvent {
   final int tab;

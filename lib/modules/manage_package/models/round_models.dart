@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chonburi_mobileapp/modules/manage_activity/models/activity_model.dart';
 
 class PackageRoundModel {
@@ -40,7 +38,6 @@ class PackageRoundModel {
     );
   }
   factory PackageRoundModel.fromMapActivityId(Map<String, dynamic> map) {
-    log('$map');
     return PackageRoundModel(
       id: map['_id'],
       round: map['round'],

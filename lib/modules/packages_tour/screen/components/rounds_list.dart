@@ -1,7 +1,7 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/round_models.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/bloc/package_bloc.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/components/activity_list.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/components/activity_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../../manage_package/models/package_tour_models.dart';

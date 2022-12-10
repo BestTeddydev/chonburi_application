@@ -9,9 +9,9 @@ import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_mo
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/bloc/package_bloc.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/components/book_card_activity.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/components/brief_list.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/components/book_card_activity.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/components/brief_list.dart';
 import 'package:chonburi_mobileapp/widget/dialog_error.dart';
 import 'package:chonburi_mobileapp/widget/dialog_loading.dart';
 import 'package:chonburi_mobileapp/widget/dialog_success.dart';

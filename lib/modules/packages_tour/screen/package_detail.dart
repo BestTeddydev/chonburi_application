@@ -1,15 +1,14 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/auth/models/user_model.dart';
-import 'package:chonburi_mobileapp/modules/auth/screen/login.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/models/activity_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/round_models.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/bloc/package_bloc.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/booking_packages.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/components/album_activity.dart';
-import 'package:chonburi_mobileapp/modules/packages_datail/screen/components/days_list.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/checkout_package.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/components/album_activity.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/components/days_list.dart';
 import 'package:chonburi_mobileapp/widget/dialog_comfirm.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:flutter/material.dart';
@@ -92,33 +91,39 @@ class _PackageDetailState extends State<PackageDetail> {
                       roundLength: roundLength,
                       totalPerson: stateActivity.totalMember,
                     ),
-     
                     BlocBuilder<UserBloc, UserState>(
                       builder: (context, stateUser) {
                         UserModel userModel = stateUser.user;
                         return SizedBox(
                           width: width * 1,
                           child: ElevatedButton(
-                            onPressed: state.packageId != widget.packageID
-                                ? null
-                                : () {
-                                    if (userModel.token.isEmpty) {
-                                      dialogWarningLogin(
-                                        context,
-                                      );
-                                      return;
-                                    }
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (builder) => BookingPackages(
-                                          checkIn: stateActivity.checkDate,
-                                          totalMember:
-                                              stateActivity.totalMember,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                            onPressed: () {
+                              if (userModel.token.isEmpty) {
+                                dialogWarningLogin(
+                                  context,
+                                );
+                                return;
+                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => CheckoutPackage(
+                                    userId: userModel.userId,
+                                    userToken: userModel.token,
+                                  ),
+                                ),
+                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (builder) => BookingPackages(
+                              //       checkIn: stateActivity.checkDate,
+                              //       totalMember:
+                              //           stateActivity.totalMember,
+                              //     ),
+                              //   ),
+                              // );
+                            },
                             style: ElevatedButton.styleFrom(
                                 primary: AppConstant.themeApp),
                             child: Text(

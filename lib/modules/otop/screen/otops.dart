@@ -54,9 +54,7 @@ class _OtopsState extends State<Otops> {
     return BlocBuilder<OtopBloc, OtopState>(
       builder: (context, state) {
         return Scaffold(
-          
           appBar: AppBar(
-            automaticallyImplyLeading: false,
             title: SizedBox(
               height: 40,
               child: TextSearch(

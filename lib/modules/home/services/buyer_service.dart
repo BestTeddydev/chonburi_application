@@ -57,7 +57,6 @@ class _BuyerServiceState extends State<BuyerService> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     checkUserExpire(widget.token);
   }

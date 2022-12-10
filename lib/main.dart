@@ -24,7 +24,7 @@ import 'modules/manage_businesses/bloc/manage_businesses_bloc.dart';
 import 'modules/manage_package/bloc/manage_package_bloc.dart';
 import 'modules/notification/bloc/notification_bloc.dart';
 import 'modules/order_package/bloc/order_package_bloc.dart';
-import 'modules/packages_datail/bloc/package_bloc.dart';
+import 'modules/packages_tour/bloc/package_bloc.dart';
 import 'modules/partner/bloc/manage_partner_bloc.dart';
 import 'modules/register/bloc/register_bloc.dart';
 import 'modules/register_partner/bloc/register_partner_bloc.dart';

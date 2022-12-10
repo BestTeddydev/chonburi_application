@@ -1,8 +1,8 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
-import 'package:chonburi_mobileapp/modules/custom_activity/screen/home_package.dart';
 import 'package:chonburi_mobileapp/modules/home/screen/components/menu_card_admin.dart';
 import 'package:chonburi_mobileapp/modules/otop/screen/otops.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/home_packages.dart';
 import 'package:chonburi_mobileapp/modules/restaurant/screen/restaurants.dart';
 import 'package:chonburi_mobileapp/widget/warning.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,6 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
-import 'package:chonburi_mobileapp/modules/custom_activity/screen/packages_list.dart';
-import 'package:chonburi_mobileapp/utils/helper/loop_id.dart';
+import 'package:chonburi_mobileapp/modules/packages_tour/screen/packages_list.dart';
 import 'package:chonburi_mobileapp/utils/ui/material_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,6 @@ class _CustomPackageState extends State<CustomPackage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return BlocBuilder<ActivityBloc, ActivityState>(
       builder: (context, state) {
         DateTime checkDate = state.checkDate;
@@ -56,9 +54,9 @@ class _CustomPackageState extends State<CustomPackage> {
                                 context, checkDate);
                             if (picked != null) {
                               // ignore: use_build_context_synchronously
-                              context.read<ActivityBloc>().add(
-                                    SelectCheckDate(date: picked),
-                                  );
+                              // context.read<ActivityBloc>().add(
+                              //       SelectCheckDate(date: picked),
+                              //     );
                             }
                           } catch (e) {
                             debugPrint(e.toString());
@@ -163,13 +161,13 @@ class _CustomPackageState extends State<CustomPackage> {
                                   color: AppConstant.colorTextHeader,
                                 ),
                                 onPressed: () {
-                                  context.read<ActivityBloc>().add(
-                                        FetchActivityEvent(
-                                          totalMembers: state.totalMember + 1,
-                                          checkDate: DateFormat('EEEE')
-                                              .format(checkDate),
-                                        ),
-                                      );
+                                  // context.read<ActivityBloc>().add(
+                                  //       FetchActivityEvent(
+                                  //         totalMembers: state.totalMember + 1,
+                                  //         checkDate: DateFormat('EEEE')
+                                  //             .format(checkDate),
+                                  //       ),
+                                  //     );
                                 },
                               ),
                             ),
@@ -190,14 +188,14 @@ class _CustomPackageState extends State<CustomPackage> {
                                 ),
                                 onPressed: state.totalMember > 0
                                     ? () {
-                                        context.read<ActivityBloc>().add(
-                                              FetchActivityEvent(
-                                                totalMembers:
-                                                    state.totalMember - 1,
-                                                checkDate: DateFormat('EEEE')
-                                                    .format(checkDate),
-                                              ),
-                                            );
+                                        // context.read<ActivityBloc>().add(
+                                        //       FetchActivityEvent(
+                                        //         totalMembers:
+                                        //             state.totalMember - 1,
+                                        //         checkDate: DateFormat('EEEE')
+                                        //             .format(checkDate),
+                                        //       ),
+                                        //     );
                                       }
                                     : null,
                               ),
@@ -205,65 +203,65 @@ class _CustomPackageState extends State<CustomPackage> {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        width: width * 1,
-                        height: height * 0.4,
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const ScrollPhysics(),
-                          itemCount: state.activities.length,
-                          itemBuilder: (context, index) => Container(
-                            margin: const EdgeInsets.all(4),
-                            width: width * 0.4,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                context.read<ActivityBloc>().add(
-                                      SelectHasTagEvent(
-                                        activitySelectedModel:
-                                            state.activities[index],
-                                      ),
-                                    );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                primary: state.activities[index].selected
-                                    ? AppConstant.bgHasTaged
-                                    : AppConstant.bgHastag,
-                              ),
-                              child: Text(
-                                '# ${state.activities[index].activityName}',
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                                maxLines: 2,
-                              ),
-                            ),
-                          ),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: width / height / 0.2,
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   margin: const EdgeInsets.all(8),
+                      //   width: width * 1,
+                      //   height: height * 0.4,
+                      //   child: GridView.builder(
+                      //     shrinkWrap: true,
+                      //     physics: const ScrollPhysics(),
+                      //     itemCount: state.activities.length,
+                      //     itemBuilder: (context, index) => Container(
+                      //       margin: const EdgeInsets.all(4),
+                      //       width: width * 0.4,
+                      //       child: ElevatedButton(
+                      //         onPressed: () {
+                      //           context.read<ActivityBloc>().add(
+                      //                 SelectHasTagEvent(
+                      //                   activitySelectedModel:
+                      //                       state.activities[index],
+                      //                 ),
+                      //               );
+                      //         },
+                      //         style: ElevatedButton.styleFrom(
+                      //           shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //           ),
+                      //           primary: state.activities[index].selected
+                      //               ? AppConstant.bgHasTaged
+                      //               : AppConstant.bgHastag,
+                      //         ),
+                      //         child: Text(
+                      //           '# ${state.activities[index].activityName}',
+                      //           overflow: TextOverflow.ellipsis,
+                      //           softWrap: true,
+                      //           maxLines: 2,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     gridDelegate:
+                      //         SliverGridDelegateWithFixedCrossAxisCount(
+                      //       crossAxisCount: 2,
+                      //       crossAxisSpacing: 20,
+                      //       mainAxisSpacing: 12,
+                      //       childAspectRatio: width / height / 0.2,
+                      //     ),
+                      //   ),
+                      // ),
                       Center(
                         child: ElevatedButton(
                           onPressed: state.activities.isEmpty
                               ? null
                               : () {
-                                  List<String> activitiesID =
-                                      loopSelectHasTag(state.activities);
-                                  context.read<ActivityBloc>().add(
-                                        FetchsPackagesEvent(
-                                          activitiesID: activitiesID,
-                                          day: DateFormat('EEEE')
-                                              .format(checkDate),
-                                        ),
-                                      );
+                                  // List<String> activitiesID =
+                                  //     loopSelectHasTag(state.activities);
+                                  // context.read<ActivityBloc>().add(
+                                  //       FetchsPackagesEvent(
+                                  //         activitiesID: activitiesID,
+                                  //         day: DateFormat('EEEE')
+                                  //             .format(checkDate),
+                                  //       ),
+                                  //     );
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

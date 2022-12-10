@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:chonburi_mobileapp/modules/custom_activity/models/activity_selected_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
-import 'package:chonburi_mobileapp/utils/services/activity_service.dart';
-import 'package:chonburi_mobileapp/utils/services/package_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -12,26 +8,26 @@ part 'activity_state.dart';
 
 class ActivityBloc extends HydratedBloc<ActivityEvent, ActivityState> {
   ActivityBloc() : super(ActivityState()) {
-    on<SelectCheckDate>(_selectCheckDate);
+    // on<SelectCheckDate>(_selectCheckDate);
     on<TotalMemberEmptyEvent>(_changeTotalMemberEmpty);
-    on<FetchActivityEvent>(_fetchActivity);
+    // on<FetchActivityEvent>(_fetchActivity);
     on<SelectHasTagEvent>(_selectHasTag);
-    on<FetchsPackagesEvent>(_fetchPackages);
+    // on<FetchsPackagesEvent>(_fetchPackages);
     on<ChangeTabEvent>(_selectTab);
   }
-  void _selectCheckDate(SelectCheckDate event, Emitter<ActivityState> emit) {
-    // event คือตัวที่รับค่าใหม่มา
-    // state คือตัวที่เก็บค่าเก่าไว้
-    emit(
-      ActivityState(
-        checkDate: event.date,
-        activities: state.activities,
-        isTab: state.isTab,
-        packages: state.packages,
-        totalMember: state.totalMember,
-      ),
-    );
-  }
+  // void _selectCheckDate(SelectCheckDate event, Emitter<ActivityState> emit) {
+  //   // event คือตัวที่รับค่าใหม่มา
+  //   // state คือตัวที่เก็บค่าเก่าไว้
+  //   emit(
+  //     ActivityState(
+  //       checkDate: event.date,
+  //       activities: state.activities,
+  //       isTab: state.isTab,
+  //       packages: state.packages,
+  //       totalMember: state.totalMember,
+  //     ),
+  //   );
+  // }
 
   void _changeTotalMemberEmpty(
       TotalMemberEmptyEvent event, Emitter<ActivityState> emitter) {
@@ -46,23 +42,23 @@ class ActivityBloc extends HydratedBloc<ActivityEvent, ActivityState> {
     );
   }
 
-  Future<void> _fetchActivity(
-      FetchActivityEvent event, Emitter<ActivityState> emitter) async {
-    List<ActivitySelectedModel> activities =
-        await ActivityService.fetchActivityPerson(
-      event.totalMembers,
-      event.checkDate,
-    );
-    emitter(
-      ActivityState(
-        activities: activities,
-        checkDate: state.checkDate,
-        isTab: state.isTab,
-        packages: state.packages,
-        totalMember: event.totalMembers,
-      ),
-    );
-  }
+  // Future<void> _fetchActivity(
+  //     FetchActivityEvent event, Emitter<ActivityState> emitter) async {
+  //   List<ActivitySelectedModel> activities =
+  //       await ActivityService.fetchActivityPerson(
+  //     event.totalMembers,
+  //     event.checkDate,
+  //   );
+  //   emitter(
+  //     ActivityState(
+  //       activities: activities,
+  //       checkDate: state.checkDate,
+  //       isTab: state.isTab,
+  //       packages: state.packages,
+  //       totalMember: event.totalMembers,
+  //     ),
+  //   );
+  // }
 
   void _selectHasTag(SelectHasTagEvent event, Emitter<ActivityState> emitter) {
     ActivitySelectedModel activityModel = event.activitySelectedModel;
@@ -83,26 +79,26 @@ class ActivityBloc extends HydratedBloc<ActivityEvent, ActivityState> {
     );
   }
 
-  Future<void> _fetchPackages(
-    FetchsPackagesEvent event,
-    Emitter<ActivityState> emitter,
-  ) async {
-    try {
-      List<PackageTourModel> packages =
-          await PackageService.fetchsPackages(event.activitiesID, event.day);
-      emitter(
-        ActivityState(
-          packages: packages,
-          activities: state.activities,
-          checkDate: state.checkDate,
-          isTab: 0,
-          totalMember: state.totalMember,
-        ),
-      );
-    } catch (e) {
-      log(e.toString());
-    }
-  }
+  // Future<void> _fetchPackages(
+  //   FetchsPackagesEvent event,
+  //   Emitter<ActivityState> emitter,
+  // ) async {
+  //   try {
+  //     List<PackageTourModel> packages =
+  //         await PackageService.fetchsPackages(event.activitiesID, event.day);
+  //     emitter(
+  //       ActivityState(
+  //         packages: packages,
+  //         activities: state.activities,
+  //         checkDate: state.checkDate,
+  //         isTab: 0,
+  //         totalMember: state.totalMember,
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
 
   void _selectTab(ChangeTabEvent event, Emitter<ActivityState> emitter) {
     emitter(
