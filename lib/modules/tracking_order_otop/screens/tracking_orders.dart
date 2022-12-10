@@ -3,6 +3,7 @@ import 'package:chonburi_mobileapp/modules/home/services/buyer_service.dart';
 import 'package:chonburi_mobileapp/modules/otop/screen/otop_detail.dart';
 import 'package:chonburi_mobileapp/modules/tracking_order_otop/bloc/tracking_order_otop_bloc.dart';
 import 'package:chonburi_mobileapp/modules/tracking_order_otop/models/order_otop_model.dart';
+import 'package:chonburi_mobileapp/modules/tracking_order_otop/screens/tracking_order_detail.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +168,22 @@ class _TrackingOrderOtopState extends State<TrackingOrderOtop> {
                                       ),
                                       child: const TextCustom(
                                         title: 'เยี่ยมชมร้านค้า >',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (builder) =>
+                                              TrackOrderDetail(order: order),
+                                        ),
+                                      ),
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: AppConstant.themeApp,
+                                      ),
+                                      child: const TextCustom(
+                                        title: 'รายละเอียก ',
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

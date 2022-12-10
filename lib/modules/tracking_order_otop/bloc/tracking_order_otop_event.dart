@@ -26,3 +26,28 @@ class FetchOrdersOtopEvent extends TrackingOrderOtopEvent {
     required this.userId,
   });
 }
+
+class BuyerUpdateOrderOtopEvent extends TrackingOrderOtopEvent {
+  final OrderOtopModel orderOtopModel;
+  final String token;
+  final File imagePayment;
+  const BuyerUpdateOrderOtopEvent({
+    required this.orderOtopModel,
+    required this.token,
+    required this.imagePayment,
+  });
+}
+
+class BuyerSetInitOrderStatusEvent extends TrackingOrderOtopEvent {
+  final String status;
+  const BuyerSetInitOrderStatusEvent({
+    required this.status,
+  });
+}
+
+class BuyerSelectImagePaymentEvent extends TrackingOrderOtopEvent {
+  final File image;
+  const BuyerSelectImagePaymentEvent({
+    required this.image,
+  });
+}

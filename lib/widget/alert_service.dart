@@ -6,9 +6,6 @@ alertService(BuildContext context, String title, String message) async {
     context: context,
     builder: (context) => AlertDialog(
       title: ListTile(
-        // leading: ShowImage(
-        //   pathImage: MyConstant.notifyImage,
-        // ),
         title: Text(
           title,
           style: const TextStyle(fontSize: 18),
@@ -19,6 +16,12 @@ alertService(BuildContext context, String title, String message) async {
         ),
       ),
       actions: [
+        TextButton(
+          onPressed: () async {
+            Navigator.pop(context);
+          },
+          child: const Text('Cancel'),
+        ),
         TextButton(
           onPressed: () async {
             Navigator.pop(context);

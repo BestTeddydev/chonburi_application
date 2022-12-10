@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:chonburi_mobileapp/modules/tracking_order_otop/models/order_otop_model.dart';
 import 'package:chonburi_mobileapp/utils/services/order_otop_service.dart';
@@ -12,6 +10,7 @@ class OrderOtopBloc extends Bloc<OrderOtopEvent, OrderOtopState> {
   OrderOtopBloc() : super(const OrderOtopState(orders: [])) {
     on<UpdateOrderOtopEvent>(updateOrderOtop);
     on<FetchMyOrdersOtopEvent>(fetchsOrderOtop);
+    on<SetInitOrderStatusEvent>(setInitOrderStatus);
   }
   void updateOrderOtop(
     UpdateOrderOtopEvent event,
@@ -20,7 +19,11 @@ class OrderOtopBloc extends Bloc<OrderOtopEvent, OrderOtopState> {
     try {
       emitter(OrderOtopState(orders: state.orders, loading: true));
 
-      await OrderOtopService.editOrderOtop('/order/product/${event.orderOtopModel.id}',event.token, event.orderOtopModel);
+      await OrderOtopService.editOrderOtop(
+        '/order/product/${event.orderOtopModel.id}',
+        event.token,
+        event.orderOtopModel,
+      );
       emitter(
         OrderOtopState(
           orders: state.orders,
@@ -64,7 +67,7 @@ class OrderOtopBloc extends Bloc<OrderOtopEvent, OrderOtopState> {
   }
 
   void setInitOrderStatus(
-      SetInitOrderStatus event, Emitter<OrderOtopState> emitter) {
+      SetInitOrderStatusEvent event, Emitter<OrderOtopState> emitter) {
     emitter(
       OrderOtopState(
         orders: state.orders,
@@ -72,5 +75,4 @@ class OrderOtopBloc extends Bloc<OrderOtopEvent, OrderOtopState> {
       ),
     );
   }
-
 }

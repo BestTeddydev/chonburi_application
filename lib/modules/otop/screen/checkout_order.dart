@@ -479,8 +479,6 @@ class _CheckoutOrderProductState extends State<CheckoutOrderProduct> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                print(
-                                    'orderOtopModel ${orderOtopModel.toMap()}');
                                 onSubmit(context, orderOtopModel, image, token);
                                 Navigator.pop(context);
                               },

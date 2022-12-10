@@ -9,11 +9,9 @@ abstract class OrderOtopEvent extends Equatable {
 
 class UpdateOrderOtopEvent extends OrderOtopEvent {
   final OrderOtopModel orderOtopModel;
-  final File imagePayment;
   final String token;
   const UpdateOrderOtopEvent({
     required this.orderOtopModel,
-    required this.imagePayment,
     required this.token,
   });
 }
@@ -27,18 +25,10 @@ class FetchMyOrdersOtopEvent extends OrderOtopEvent {
   });
 }
 
-class SetInitOrderStatus extends OrderOtopEvent {
+class SetInitOrderStatusEvent extends OrderOtopEvent {
   final String status;
-  const SetInitOrderStatus({
+  const SetInitOrderStatusEvent({
     required this.status,
   });
 }
 
-class ChangeStatusOrderEvent extends OrderOtopEvent {
-  final String token;
-  final OrderOtopModel order;
-  const ChangeStatusOrderEvent({
-    required this.token,
-    required this.order,
-  });
-}

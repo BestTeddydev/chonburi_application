@@ -18,9 +18,11 @@ class BusinessList extends StatefulWidget {
 class _BusinessListState extends State<BusinessList> {
   @override
   void initState() {
-    context
-        .read<ManageActivityBloc>()
-        .add(SelectBusinessEvent(businessNameModel: widget.businessNameModel));
+    context.read<ManageActivityBloc>().add(
+          SelectBusinessEvent(
+            businessNameModel: widget.businessNameModel,
+          ),
+        );
     context.read<BusinessesBloc>().add(
           const FetchBusinesses(
             businessName: '',

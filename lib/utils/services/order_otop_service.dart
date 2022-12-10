@@ -9,7 +9,6 @@ class OrderOtopService {
     Response response =
         await DioService.dioGetAuthen('/order/product?$query=$userId', token);
     for (var order in response.data) {
-      print('print order $order');
       OrderOtopModel orderOtopModel = OrderOtopModel.fromMap(order);
       orders.add(orderOtopModel);
     }

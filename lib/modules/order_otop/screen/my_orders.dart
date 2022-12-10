@@ -52,8 +52,11 @@ class _MyOrdersOtopState extends State<MyOrdersOtop> {
                   child: Card(
                     margin: const EdgeInsets.all(8),
                     child: InkWell(
-                      onTap: () => MaterialPageRoute(
-                        builder: (builder) => MyOrderDetail(order: order),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (builder) => MyOrderDetail(order: order),
+                        ),
                       ),
                       child: SizedBox(
                         height: height * 0.16,
