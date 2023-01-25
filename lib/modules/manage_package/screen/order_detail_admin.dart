@@ -143,21 +143,21 @@ class _OrderDetailAdminState extends State<OrderDetailAdmin> {
                   width: width * 0.5,
                   child: ElevatedButton(
                     onPressed: () {
-                      bool checkAlready = widget
-                          .orderPackageModel.orderActivities
-                          .where((element) =>
-                              element.status != AppConstant.acceptStatus)
-                          .isNotEmpty;
-                      if (checkAlready) {
-                        showDialog(
-                          context: context,
-                          builder: (builder) => const DialogError(
-                            message:
-                                'ไม่สามารถอนุมัติได้ เนื่องจากกิจกรรมยังไม่ถูกอนุมัติทั้งหมด',
-                          ),
-                        );
-                        return;
-                      }
+                      // bool checkAlready = widget
+                      //     .orderPackageModel.orderActivities
+                      //     .where((element) =>
+                      //         element.status != AppConstant.acceptStatus)
+                      //     .isNotEmpty;
+                      // if (checkAlready) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (builder) => const DialogError(
+                      //       message:
+                      //           'ไม่สามารถอนุมัติได้ เนื่องจากกิจกรรมยังไม่ถูกอนุมัติทั้งหมด',
+                      //     ),
+                      //   );
+                      //   return;
+                      // }
                       dialogConfirm(
                         context,
                         onAcceptOrderPackage,

@@ -1,7 +1,10 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
+import 'package:chonburi_mobileapp/modules/manage_package/screen/update_round.dart';
 import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/packages_tour/screen/package_detail.dart';
+import 'package:chonburi_mobileapp/widget/dialog_comfirm.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
 import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +64,48 @@ class _PackageListState extends State<PackageList> {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            actions: [
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, stateUser) {
+                  return IconButton(
+                    onPressed: () {
+                      if (stateUser.user.token.isEmpty) {
+                        dialogWarningLogin(context);
+                        return;
+                      }
+                      PackageTourModel packageTourModel = PackageTourModel(
+                        id: '',
+                        packageName: 'custom',
+                        contactPhone: 'contact phone',
+                        contactName: 'contact name',
+                        dayTrips: '',
+                        round: [],
+                        dayForrent: [],
+                        packageImage: '',
+                        mark: '',
+                        createdBy: stateUser.user.username,
+                        price: 0,
+                        introduce: '',
+                        accountPayment: 'account payment',
+                        imagePayment: '',
+                        typePayment: 'type payment',
+                        description: '',
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (builder) => UpdateRound(
+                            token: stateUser.user.token,
+                            packageTourModel: packageTourModel,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.manage_history),
+                  );
+                },
+              ),
+            ],
             backgroundColor: AppConstant.themeApp,
             iconTheme: IconThemeData(color: AppConstant.colorTextHeader),
           ),

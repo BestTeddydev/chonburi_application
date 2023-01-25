@@ -107,41 +107,48 @@ class _OrderDetailBuyerState extends State<OrderDetailBuyer> {
             ),
             SizedBox(
               width: width * 1,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (widget.orderPackageModel.status != AppConstant.pay) {
-                    showDialog(
-                      context: context,
-                      builder: (builder) => DialogError(
-                        message:
-                            'ยังไม่สามารถชำระเงินได้ เนื่องจากอยู่ในสถานะ ${widget.orderPackageModel.status}',
+              child: widget.orderPackageModel.status == AppConstant.payed ||
+                      widget.orderPackageModel.status ==
+                          AppConstant.acceptStatus
+                  ? null
+                  : ElevatedButton(
+                      // check order package of custom or normal package
+                      onPressed: () {
+                        if (widget.orderPackageModel.status !=
+                            AppConstant.pay) {
+                          showDialog(
+                            context: context,
+                            builder: (builder) => DialogError(
+                              message:
+                                  'ยังไม่สามารถชำระเงินได้ เนื่องจากอยู่ในสถานะ ${widget.orderPackageModel.status}',
+                            ),
+                          );
+                          return;
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (builder) => PaymentPackage(
+                              packageTourModel:
+                                  widget.orderPackageModel.package,
+                              totalPrice: widget.orderPackageModel.totalPrice,
+                              token: widget.token,
+                              docId: widget.orderPackageModel.id,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppConstant.themeApp,
                       ),
-                    );
-                    return;
-                  }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (builder) => PaymentPackage(
-                        packageTourModel: widget.orderPackageModel.package,
-                        totalPrice: widget.orderPackageModel.totalPrice,
-                        token: widget.token,
-                        docId: widget.orderPackageModel.id,
+                      child: Text(
+                        'ชำระเงิน',
+                        style: TextStyle(
+                          color: AppConstant.colorText,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: AppConstant.themeApp,
-                ),
-                child: Text(
-                  'ชำระเงิน',
-                  style: TextStyle(
-                    color: AppConstant.colorText,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
             )
           ],
         ),
