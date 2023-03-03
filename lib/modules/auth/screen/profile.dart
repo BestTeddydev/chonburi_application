@@ -1,6 +1,7 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/auth/models/user_model.dart';
+import 'package:chonburi_mobileapp/modules/auth/screen/edit_profile.dart';
 import 'package:chonburi_mobileapp/modules/contact_info/screen/contact_list.dart';
 import 'package:chonburi_mobileapp/modules/register/screen/register.dart';
 import 'package:chonburi_mobileapp/modules/tracking_order_otop/screens/tracking_orders.dart';
@@ -114,7 +115,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           SizedBox(
-                            width: width * 0.7,
+                            width: width * 0.65,
                             child: Text(
                               '${state.user.firstName} ${state.user.lastName}',
                               style: TextStyle(
@@ -123,9 +124,21 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppConstant.colorText,
+                          IconButton(
+                            onPressed: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => EditProfile(
+                                    user: state.user,
+                                  ),
+                                ),
+                              ),
+                            },
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppConstant.colorText,
+                            ),
                           ),
                         ],
                       ),

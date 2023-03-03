@@ -30,3 +30,12 @@ class UpdateDeviceTokenEvent extends UserEvent {
 
   const UpdateDeviceTokenEvent({required this.token});
 }
+
+class ChangeProfileEvent extends UserEvent {
+  final UserModel user;
+  final String? password;
+  const ChangeProfileEvent({
+    required this.user,
+    this.password,
+  });
+}

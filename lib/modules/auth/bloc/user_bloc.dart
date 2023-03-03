@@ -12,6 +12,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     on<UserLogoutEvent>(_userLogout);
     on<PressPasswordEvent>(_pressedPassword);
     on<UpdateDeviceTokenEvent>(_updateTokenDevice);
+    on<ChangeProfileEvent>(_changeProfile);
   }
 
   void _userLogin(UserLoginEvent event, Emitter<UserState> emitter) async {
@@ -23,6 +24,39 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
       );
       emitter(UserState(user: userModel, hasError: false, loading: false));
     } catch (e) {
+      emitter(UserState(hasError: true, loading: false));
+    }
+  }
+
+  void _changeProfile(
+      ChangeProfileEvent event, Emitter<UserState> emitter) async {
+    try {
+      emitter(UserState(loading: true));
+      await UserService.changeProfile(
+        event.user.userId,
+        event.user.token,
+        event.user.username,
+        event.user.firstName,
+        event.user.lastName,
+        event.password,
+      );
+      UserModel userModel = UserModel(
+        // for login again
+        userId: '',
+        username: '',
+        firstName: '',
+        lastName: '',
+        roles: 'guest',
+        token: '',
+        tokenDevice: event.user.tokenDevice,
+        profileRef: '',
+      );
+      emitter(UserState(
+          user: event.password == null ? event.user : userModel,
+          hasError: false,
+          loading: false));
+    } catch (e) {
+      print(e);
       emitter(UserState(hasError: true, loading: false));
     }
   }

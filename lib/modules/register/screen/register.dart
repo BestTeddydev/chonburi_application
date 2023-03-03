@@ -11,6 +11,7 @@ import 'package:chonburi_mobileapp/widget/dialog_error.dart';
 import 'package:chonburi_mobileapp/widget/dialog_loading.dart';
 import 'package:chonburi_mobileapp/widget/dialog_success.dart';
 import 'package:chonburi_mobileapp/widget/text_form_field.dart';
+import 'package:chonburi_mobileapp/widget/text_form_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -216,8 +217,10 @@ class _RegisterUserState extends State<RegisterUser> {
                                 height: 40,
                                 margin:
                                     const EdgeInsets.only(top: 6, bottom: 6),
-                                child: TextFormFieldCustom(
+                                child: TextFormPassword(
+                                  eyesPassword: true,
                                   controller: passwordController,
+                                  onPressedEye: () {},
                                   labelText: 'รหัสผ่าน',
                                   requiredText: 'กรุณากรอกรหัสผ่าน',
                                 ),

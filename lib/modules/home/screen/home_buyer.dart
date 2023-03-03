@@ -13,11 +13,11 @@ class HomeBuyer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> menuCards = [
-      {
-        "title": 'แพ็คเกจทัวร์',
-        "pathImage": AppConstantAssets.packageImage,
-        "goWidget": const HomePackages(),
-      },
+      // {
+      //   "title": 'แพ็คเกจทัวร์',
+      //   "pathImage": AppConstantAssets.packageImage,
+      //   "goWidget": const HomePackages(),
+      // },
       {
         "title": 'ร้านอาหาร',
         "pathImage": AppConstantAssets.foogImage,

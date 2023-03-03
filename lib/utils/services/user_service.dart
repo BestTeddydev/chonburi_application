@@ -25,4 +25,28 @@ class UserService {
       {"tokenDevice": tokenDevice},
     );
   }
+
+  static Future<void> deleteAccount(String userId, String token) async {
+    await DioService.dioPut(
+      "/user/delete/account/$userId",
+      token,
+      {"userId": userId},
+    ); // data ไม่ได้ใช้ เขียนไปงั้นๆ
+  }
+
+  static Future<void> changeProfile(
+    String userId,
+    String token,
+    String username,
+    String firstName,
+    String lastName,
+    String? password,
+  ) async {
+    await DioService.dioPut("/user/change/account/$userId", token, {
+      "username": username,
+      "firstName": firstName,
+      "lastName": lastName,
+      "password": password,
+    });
+  }
 }
