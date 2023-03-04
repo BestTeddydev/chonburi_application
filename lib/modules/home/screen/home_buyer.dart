@@ -28,11 +28,11 @@ class HomeBuyer extends StatelessWidget {
         "pathImage": AppConstantAssets.otopImage,
         "goWidget": const Otops(),
       },
-      {
-        "title": 'บ้านพัก',
-        "pathImage": AppConstantAssets.resortImage,
-        "goWidget": const WarningDeveloping(),
-      },
+      // {
+      //   "title": 'บ้านพัก',
+      //   "pathImage": AppConstantAssets.resortImage,
+      //   "goWidget": const WarningDeveloping(),
+      // },
 
       // {
       //   "title": 'แหล่งท่องเที่ยว',
