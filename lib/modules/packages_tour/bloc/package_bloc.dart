@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:chonburi_mobileapp/modules/contact_admin/models/contact_admin_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
@@ -24,6 +25,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
     on<FetchsPackagesEvent>(_fetchPackages);
     on<SelectImageSlipPaymentEvent>(selectImageSlip);
     on<CheckoutPackageEvent>(checkoutPackage);
+    on<SelectCheckEndDate>(_selectCheckEndDate);
   }
 
   Future<void> _fetchPackages(
@@ -41,6 +43,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
           packages: packages,
           totalMember: state.totalMember,
           checkDate: state.checkDate,
+          checkEndDate: state.checkEndDate,
         ),
       );
     } catch (e) {
@@ -64,10 +67,21 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
           packages: state.packages,
           totalMember: state.totalMember,
           checkDate: state.checkDate,
+          checkEndDate: state.checkEndDate,
         ),
       );
     } catch (e) {
-      emitter(PackageState(isError: true));
+      log(e.toString());
+      emitter(PackageState(
+        isError: true,
+        packagesTour: state.packagesTour,
+        buyActivity: state.buyActivity,
+        packageId: state.packageId,
+        packages: state.packages,
+        totalMember: state.totalMember,
+        checkDate: state.checkDate,
+        checkEndDate: state.checkEndDate,
+      ));
     }
   }
 
@@ -82,6 +96,22 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         checkDate: event.date,
         packages: state.packages,
         totalMember: state.totalMember,
+        checkEndDate: state.checkEndDate,
+      ),
+    );
+  }
+  void _selectCheckEndDate(SelectCheckEndDate event, Emitter<PackageState> emitter) {
+    // event คือตัวที่รับค่าใหม่มา
+    // state คือตัวที่เก็บค่าเก่าไว้
+    emitter(
+      PackageState(
+        packagesTour: state.packagesTour,
+        buyActivity: state.buyActivity,
+        packageId: state.packageId,
+        checkDate: state.checkDate,
+        packages: state.packages,
+        totalMember: state.totalMember,
+        checkEndDate: event.date,
       ),
     );
   }
@@ -95,10 +125,12 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         checkDate: state.checkDate,
         packages: state.packages,
         totalMember: event.member,
+        checkEndDate: state.checkEndDate,
+        
       ),
     );
   }
-
+  // cancel not use
   void _buyActivity(BuyActivityEvent event, Emitter<PackageState> emitter) {
     List<OrderActivityModel> allActivities = List.from(state.buyActivity)
       ..add(event.activityModel);
@@ -111,10 +143,11 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         packages: state.packages,
         totalMember: state.totalMember,
         checkDate: state.checkDate,
+        checkEndDate: state.checkEndDate,
       ),
     );
   }
-
+  // cancel not use
   void _cancelActivity(
       CancelActivityEvent event, Emitter<PackageState> emitter) {
     List<OrderActivityModel> allActivities = List.from(state.buyActivity)
@@ -132,10 +165,11 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         packages: state.packages,
         totalMember: state.totalMember,
         checkDate: state.checkDate,
+        checkEndDate: state.checkEndDate,
       ),
     );
   }
-
+  // not use
   void _clearBuyActivity(
       ClearBuyActivityEvent event, Emitter<PackageState> emitter) {
     emitter(
@@ -147,6 +181,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         packages: state.packages,
         totalMember: state.totalMember,
         checkDate: state.checkDate,
+        checkEndDate: state.checkEndDate,
       ),
     );
   }
@@ -164,6 +199,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         totalMember: state.totalMember,
         checkDate: state.checkDate,
         slipPayment: event.image,
+        checkEndDate: state.checkEndDate,
       ),
     );
   }
@@ -189,6 +225,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
           checkDate: state.checkDate,
           slipPayment: state.slipPayment,
           loaded: true,
+          checkEndDate: state.checkEndDate,
         ),
       );
     } catch (e) {
@@ -202,6 +239,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
           checkDate: state.checkDate,
           slipPayment: state.slipPayment,
           isError: true,
+          checkEndDate: state.checkEndDate,
         ),
       );
     }

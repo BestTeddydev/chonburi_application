@@ -102,17 +102,14 @@ class _EditPackageState extends State<EditPackage> {
   @override
   void initState() {
     packageNameController.text = widget.packageModel.packageName;
-    contactNameController.text = widget.packageModel.contactName;
     priceController.text = widget.packageModel.price.toString();
-    contactPhoneController.text = widget.packageModel.contactPhone;
     markController.text = widget.packageModel.mark;
-    accountController.text = widget.packageModel.accountPayment;
     descriptionController.text = widget.packageModel.description;
     context.read<ManagePackageBloc>().add(
           SetDataPackageEvent(
             tripsType: widget.packageModel.dayTrips,
             dayForrents: widget.packageModel.dayForrent,
-            typePayment: widget.packageModel.typePayment,
+            typePayment: widget.packageModel.contactAdmin.typePayment,
           ),
         );
     super.initState();
@@ -321,7 +318,8 @@ class _EditPackageState extends State<EditPackage> {
                       onTap: () => dialogCamera(context, onSetImagePayment),
                       child: state.imagePayment.path.isEmpty
                           ? ShowImageNetwork(
-                              pathImage: widget.packageModel.imagePayment,
+                              pathImage:
+                                  widget.packageModel.contactAdmin.imagePayment,
                             )
                           : Image.file(
                               state.imagePayment,
@@ -355,23 +353,18 @@ class _EditPackageState extends State<EditPackage> {
                     child: ElevatedButton(
                       onPressed: () {
                         PackageTourModel packageTourModel = PackageTourModel(
-                          id: widget.packageModel.id,
-                          packageName: packageNameController.text,
-                          contactPhone: contactPhoneController.text,
-                          contactName: contactNameController.text,
-                          dayTrips: state.dayType,
-                          round: [],
-                          dayForrent: state.dayForrents,
-                          packageImage: widget.packageModel.packageImage,
-                          mark: markController.text,
-                          createdBy: '',
-                          price: double.parse(priceController.text),
-                          introduce: '',
-                          imagePayment: widget.packageModel.imagePayment,
-                          typePayment: state.typePayment,
-                          accountPayment: accountController.text,
-                          description: descriptionController.text,
-                        );
+                            id: widget.packageModel.id,
+                            packageName: packageNameController.text,
+                            dayTrips: state.dayType,
+                            round: [],
+                            dayForrent: state.dayForrents,
+                            packageImage: widget.packageModel.packageImage,
+                            mark: markController.text,
+                            createdBy: '',
+                            price: double.parse(priceController.text),
+                            introduce: '',
+                            description: descriptionController.text,
+                            contactAdmin: widget.packageModel.contactAdmin);
                         context.read<ManagePackageBloc>().add(
                               UpdatePackageEvent(
                                 packageTourModel: packageTourModel,

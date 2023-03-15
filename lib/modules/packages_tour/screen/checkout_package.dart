@@ -63,6 +63,11 @@ class _CheckoutPackageState extends State<CheckoutPackage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        title: const TextCustom(title: 'ชำระเงิน'),
+        backgroundColor: AppConstant.themeApp,
+        iconTheme: IconThemeData(color: AppConstant.colorTextHeader),
+      ),
       body: BlocListener<PackageBloc, PackageState>(
         listener: (context, packageListener) {
           if (packageListener.loaded) {
@@ -119,15 +124,17 @@ class _CheckoutPackageState extends State<CheckoutPackage> {
                                   buildText(
                                     width,
                                     'ชื่อเจ้าของบัญชี:',
-                                    state.packagesTour.contactName,
+                                    state.packagesTour.contactAdmin.fullName,
                                   ),
                                   buildText(
                                     width,
                                     'พร้อมเพย์/ธนาคาร:',
-                                    state.packagesTour.typePayment,
+                                    state.packagesTour.contactAdmin.typePayment,
                                   ),
                                   buildPromptpay(
-                                      width, state.packagesTour.accountPayment),
+                                      width,
+                                      state.packagesTour.contactAdmin
+                                          .accountPayment),
                                   buildText(
                                     width,
                                     'ราคาทั้งหมด:',
@@ -147,7 +154,7 @@ class _CheckoutPackageState extends State<CheckoutPackage> {
                           ),
                           FutureBuilder(
                               future: GenerateQRCodeService.getQRCodeURL(
-                                state.packagesTour.accountPayment,
+                                state.packagesTour.contactAdmin.accountPayment,
                                 state.totalMember * state.packagesTour.price,
                               ),
                               builder: (
@@ -163,7 +170,7 @@ class _CheckoutPackageState extends State<CheckoutPackage> {
                                   width,
                                   height,
                                   split[1],
-                                  state.packagesTour.imagePayment,
+                                  state.packagesTour.contactAdmin.imagePayment,
                                 );
                               }),
                           buildTextSlip(),

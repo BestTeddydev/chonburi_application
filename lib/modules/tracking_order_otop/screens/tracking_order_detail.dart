@@ -96,8 +96,8 @@ class _TrackOrderDetailState extends State<TrackOrderDetail> {
               children: [
                 Card(
                   margin: const EdgeInsets.all(8),
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    width: width * 1,
                     child: Column(
                       children: [
                         Row(

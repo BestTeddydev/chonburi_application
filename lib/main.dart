@@ -1,5 +1,6 @@
 import 'package:chonburi_mobileapp/modules/contact_admin/bloc/contact_admin_bloc.dart';
 import 'package:chonburi_mobileapp/modules/custom_activity/bloc/activity_bloc.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/bloc/custom_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_room/bloc/manage_room_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_otop/bloc/order_otop_bloc.dart';
 import 'package:chonburi_mobileapp/modules/otop/bloc/otop_bloc.dart';
@@ -67,6 +68,7 @@ void main() async {
           BlocProvider(create: (context) => TrackingOrderOtopBloc()),
           BlocProvider(create: (context) => OrderOtopBloc()),
           BlocProvider(create: (context) => ContactAdminBloc()),
+          BlocProvider(create: (context) => CustomPackageBloc()),
         ],
         child: const MyApp(),
       ),

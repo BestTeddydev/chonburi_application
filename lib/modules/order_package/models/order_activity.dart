@@ -51,7 +51,20 @@ class OrderActivityModel {
       dayName: map['dayName'],
     );
   }
-
+factory OrderActivityModel.fromMapCustom(Map<String, dynamic> map) {
+    return OrderActivityModel(
+      id: map['id'],
+      activityName: map['activityName'],
+      price: map['price']?.toDouble(),
+      imageRef: List<String>.from(map['imageRef']),
+      totalPerson: map['totalPerson']?.toInt(),
+      businessId: map['businessId'],
+      status: map['status'],
+      roundId: map['roundId'],
+      roundName: map['roundName'],
+      dayName: map['dayName'],
+    );
+  }
   OrderActivityModel copyWith({
     String? id,
     String? activityName,

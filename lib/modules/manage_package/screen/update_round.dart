@@ -140,9 +140,6 @@ class _UpdateRoundState extends State<UpdateRound> {
                                 PackageTourModel(
                               id: widget.packageTourModel.id,
                               packageName: widget.packageTourModel.packageName,
-                              contactPhone:
-                                  widget.packageTourModel.contactPhone,
-                              contactName: widget.packageTourModel.contactName,
                               dayTrips: widget.packageTourModel.dayTrips,
                               round: roundModel,
                               dayForrent: widget.packageTourModel.dayForrent,
@@ -152,10 +149,8 @@ class _UpdateRoundState extends State<UpdateRound> {
                               createdBy: widget.packageTourModel.createdBy,
                               price: widget.packageTourModel.price,
                               introduce: widget.packageTourModel.introduce,
-                              accountPayment: widget.packageTourModel.accountPayment,
-                              imagePayment: widget.packageTourModel.imagePayment,
-                              typePayment: widget.packageTourModel.typePayment,
                               description: widget.packageTourModel.description,
+                              contactAdmin: widget.packageTourModel.contactAdmin,
                             );
                             context.read<ManagePackageBloc>().add(
                                   UpdatePackageEvent(

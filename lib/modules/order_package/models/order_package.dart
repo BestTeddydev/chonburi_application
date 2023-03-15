@@ -81,7 +81,7 @@ class OrderPackageModel {
       totalPrice: map['totalPrice']?.toDouble(),
       checkIn: DateTime.parse(map['checkIn']).toLocal(),
       checkOut: DateTime.parse(map['checkOut']).toLocal(),
-      contact: ContactModel.fromMapId(map['contact']),
+      contact: ContactModel.fromMap(map['contact']),
       orderActivities: List<OrderActivityModel>.from(
         map['orderActivities'].map(
           (x) => OrderActivityModel.fromMap(x),

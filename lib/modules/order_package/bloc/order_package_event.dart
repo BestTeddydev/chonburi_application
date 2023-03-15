@@ -28,6 +28,18 @@ class FetchsOrderPackageEvent extends OrderPackageEvent {
      this.packageId = '',
   });
 }
+class FetchsOrderCustomPackageEvent extends OrderPackageEvent {
+  final String token;
+  final String id;
+  final String businessId;
+  final String packageId;
+  const FetchsOrderCustomPackageEvent({
+    required this.token,
+     this.id = '',
+     this.businessId = '',
+     this.packageId = '',
+  });
+}
 class UpdateOrderPackageEvent extends OrderPackageEvent {
   final String token;
   final String status;

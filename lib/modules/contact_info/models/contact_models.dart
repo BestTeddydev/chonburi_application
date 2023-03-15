@@ -71,6 +71,17 @@ class ContactModel {
       id: map['_id'] ?? '',
     );
   }
+  factory ContactModel.fromMapOrderCustom(Map<String, dynamic> map) {
+    return ContactModel(
+      userId: map['userId'] ?? '',
+      fullName: map['fullName'] ?? '',
+      address: map['address'] ?? '',
+      phoneNumber: map['phoneNumber'] ?? '',
+      lat: map['lat']?.toDouble() ?? 0.0,
+      lng: map['lng']?.toDouble() ?? 0.0,
+      id:'',
+    );
+  }
   factory ContactModel.fromMapId(String id) {
     return ContactModel(
       userId: '',

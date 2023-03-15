@@ -76,7 +76,7 @@ class ManagePackageBloc extends Bloc<ManagePackageEvent, ManagePackageState> {
       if (state.imagePayment.path.isNotEmpty) {
         String fileNamePayment =
             await UploadService.singleFile(state.imagePayment.path);
-        event.packageTourModel.imagePayment = fileNamePayment;
+        event.packageTourModel.contactAdmin.imagePayment = fileNamePayment;
       }
       try {
         PackageTourModel packageTour = await PackageService.createPackage(
@@ -145,7 +145,7 @@ class ManagePackageBloc extends Bloc<ManagePackageEvent, ManagePackageState> {
       if (state.imagePayment.path.isNotEmpty) {
         String fileNamePayment =
             await UploadService.singleFile(state.imagePayment.path);
-        event.packageTourModel.imagePayment = fileNamePayment;
+        event.packageTourModel.contactAdmin.imagePayment = fileNamePayment;
       }
       await PackageService.updatePackage(event.token, event.packageTourModel);
       int index = List<PackageTourModel>.from(state.packages).indexWhere(
@@ -363,7 +363,7 @@ class ManagePackageBloc extends Bloc<ManagePackageEvent, ManagePackageState> {
           dayForrents: state.dayForrents,
           dayType: state.dayType,
           hasError: true,
-          message: 'เกิดเหตุขัดข้อง ขออภัยในความไม่สะดวกd',
+          message: 'เกิดเหตุขัดข้อง ขออภัยในความไม่สะดวก',
           rounds: state.rounds,
         ),
       );

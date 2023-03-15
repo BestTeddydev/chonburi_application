@@ -2,6 +2,7 @@ part of 'package_bloc.dart';
 
 class PackageState extends Equatable {
   final DateTime checkDate;
+  final DateTime checkEndDate;
   final int totalMember;
   final PackageTourModel packagesTour;
   final List<OrderActivityModel> buyActivity;
@@ -18,13 +19,12 @@ class PackageState extends Equatable {
     this.isError = false,
     this.packageId = "",
     DateTime? checkDate,
+    DateTime? checkEndDate,
     this.totalMember = 0,
     File? slipPayment,
   })  : packagesTour = packagesTour ??
             PackageTourModel(
               round: [],
-              contactName: '',
-              contactPhone: '',
               createdBy: '',
               dayForrent: [],
               dayTrips: '',
@@ -34,13 +34,22 @@ class PackageState extends Equatable {
               packageName: '',
               price: 0.0,
               introduce: '',
-              accountPayment: '',
-              imagePayment: '',
-              typePayment: '',
               description: '',
+              contactAdmin: ContactAdminModel(
+                accountPayment: '',
+                address: '',
+                createdBy: '',
+                fullName: '',
+                id: '',
+                phoneNumber: '',
+                typePayment: '',
+                imagePayment: '',
+                profileRef: '',
+              ),
             ),
         buyActivity = buyActivity ?? <OrderActivityModel>[],
         checkDate = checkDate ?? DateTime.now(),
+        checkEndDate = checkEndDate ?? DateTime.now(),
         slipPayment = slipPayment ?? File('');
 
   @override
@@ -54,6 +63,7 @@ class PackageState extends Equatable {
         checkDate,
         slipPayment,
         loaded,
+        checkEndDate
       ];
 
   Map<String, dynamic> toMap() {
@@ -61,6 +71,7 @@ class PackageState extends Equatable {
       'buyActivity': buyActivity.map((x) => x.toMap()).toList(),
       'packageId': packageId,
       'checkDate': checkDate.millisecondsSinceEpoch,
+      'checkEndDate': checkEndDate.millisecondsSinceEpoch,
       'totalMember': totalMember
     };
   }
@@ -74,6 +85,7 @@ class PackageState extends Equatable {
         ),
         packageId: map['packageId'],
         checkDate: DateTime.fromMillisecondsSinceEpoch(map['checkDate']),
+        checkEndDate: DateTime.fromMillisecondsSinceEpoch(map['checkEndDate']),
         totalMember: map['totalMember']);
   }
 }

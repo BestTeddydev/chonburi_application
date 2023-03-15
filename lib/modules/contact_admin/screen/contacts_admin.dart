@@ -1,6 +1,8 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/contact_admin/bloc/contact_admin_bloc.dart';
 import 'package:chonburi_mobileapp/modules/contact_admin/models/contact_admin_model.dart';
+import 'package:chonburi_mobileapp/widget/show_image_network.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +29,12 @@ class _ContactAdminListState extends State<ContactAdminList> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        title: const TextCustom(title: "เลือกผู้ดูแลแพ็คเกจ"),
+        iconTheme: IconThemeData(color: AppConstant.colorTextHeader),
+        backgroundColor: AppConstant.themeApp,
+      ),
+      backgroundColor: AppConstant.backgroudApp,
       body: BlocBuilder<ContactAdminBloc, ContactAdminState>(
         builder: (context, state) {
           return ListView.builder(
@@ -37,7 +45,7 @@ class _ContactAdminListState extends State<ContactAdminList> {
               ContactAdminModel contact = state.contacts[index];
               bool isMatch = contact.id == state.selectContact.id;
               return Card(
-                color: AppConstant.bgTextFormField,
+                color: isMatch ? AppConstant.bgTextFormField : Colors.white,
                 child: InkWell(
                   onTap: () {
                     if (!isMatch) {
@@ -48,39 +56,23 @@ class _ContactAdminListState extends State<ContactAdminList> {
                   },
                   child: Row(
                     children: [
+                      SizedBox(
+                        width: width * 0.3,
+                        child: ShowImageNetwork(pathImage: contact.profileRef),
+                      ),
                       Container(
-                        width: width * 0.7,
+                        width: width * 0.6,
                         height: height * 0.1,
-                        margin: const EdgeInsets.all(4),
+                        margin: const EdgeInsets.all(8),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              contact.fullName,
-                              style: TextStyle(
-                                color: AppConstant.colorText,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              contact.phoneNumber,
-                              style: TextStyle(
-                                color: AppConstant.colorText,
-                              ),
-                            ),
-                            Text(
-                              contact.typePayment,
-                              style: TextStyle(
-                                color: AppConstant.colorText,
-                              ),
-                            ),
+                            TextCustom(title: contact.fullName),
+                            TextCustom(title: contact.phoneNumber),
+                            TextCustom(title: contact.typePayment),
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        width: width * 0.2,
-                        child: isMatch ? const Icon(Icons.check) : null,
                       ),
                     ],
                   ),

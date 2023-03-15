@@ -1,7 +1,8 @@
-import 'package:chonburi_mobileapp/modules/manage_package/screen/order_detail_admin.dart';
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
 import 'package:chonburi_mobileapp/modules/order_package/screen/components/card_order_package.dart';
+import 'package:chonburi_mobileapp/modules/order_package/screen/order_detail_buyer.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,11 +46,8 @@ class _OrderPackageAdminState extends State<OrderPackageAdmin> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (builder) => OrderDetailAdmin(
-                          orderPackageModel: order,
-                          token: widget.token,
-                        ),
-                      ),
+                          builder: (builder) => OrderDetailBuyer(
+                              orderPackageModel: order, token: widget.token),),
                     ),
                     child: CardOrderPackage(
                       width: width,

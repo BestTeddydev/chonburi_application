@@ -9,6 +9,8 @@ part 'contact_admin_state.dart';
 class ContactAdminBloc extends Bloc<ContactAdminEvent, ContactAdminState> {
   ContactAdminBloc() : super(ContactAdminState()) {
     on<AdminCreateContactEvent>(createContactAdmin);
+    on<FetchsContactAdminEvent>(fetchsContactsAdmin);
+    on<SelectContactAdminEvent>(selectContactAdmin);
   }
 
   void createContactAdmin(

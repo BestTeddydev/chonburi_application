@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/screen/admin/activity_list.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/screen/main_package.dart';
+import 'package:chonburi_mobileapp/modules/manage_package/screen/order_custom_package.dart';
 import 'package:chonburi_mobileapp/modules/partner/screen/home_partner.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,6 @@ class HomeAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> menuCards = [
-      // {
-      //   "title": 'สมาชิกในระบบ',
-      //   "pathImage": AppConstantAssets.memberPicture,
-      //   "goWidget": const BuyerList(),
-      // },
       {
         "title": 'ผู้ประกอบการ',
         "pathImage": AppConstantAssets.partnerImage,
@@ -32,16 +28,6 @@ class HomeAdmin extends StatelessWidget {
         "pathImage": AppConstantAssets.packageTourImage,
         "goWidget": MainPackageAdmin(token: token),
       },
-      // {
-      //   "title": 'แหล่งท่องเที่ยว',
-      //   "pathImage": AppConstantAssets.locationImage,
-      //   "goWidget": Locations(isAdmin: true),
-      // },
-      // {
-      //   "title": 'ไกด์นำเที่ยว',
-      //   "pathImage": AppConstantAssets.guideImage,
-      //   "goWidget": GuideList(),
-      // },
       {
         "title": 'กิจกรรม',
         "pathImage": AppConstantAssets.notifyImage,
@@ -49,11 +35,11 @@ class HomeAdmin extends StatelessWidget {
           token: token,
         ),
       },
-      // {
-      //   "title": 'กิจการยอดนิยม',
-      //   "pathImage": AppConstantAssets.partnerImage,
-      //   "goWidget": BusinessPopular(),
-      // },
+      {
+        "title": 'ออเดอร์คัสตอม',
+        "pathImage": AppConstantAssets.packageTourImage,
+        "goWidget": OrderCustomPackage(token: token),
+      },
     ];
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -91,8 +77,7 @@ class HomeAdmin extends StatelessWidget {
                 width: width * 1,
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio:
-                      height > 730 ? width / height / 0.4 : width / height / 1,
+                  childAspectRatio: width / height / 0.6,
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   children: List.generate(

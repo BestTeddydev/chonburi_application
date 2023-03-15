@@ -1,5 +1,6 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
+import 'package:chonburi_mobileapp/modules/contact_admin/models/contact_admin_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/screen/update_round.dart';
 import 'package:chonburi_mobileapp/modules/packages_tour/bloc/package_bloc.dart';
@@ -76,8 +77,6 @@ class _PackageListState extends State<PackageList> {
                       PackageTourModel packageTourModel = PackageTourModel(
                         id: '',
                         packageName: 'custom',
-                        contactPhone: 'contact phone',
-                        contactName: 'contact name',
                         dayTrips: '',
                         round: [],
                         dayForrent: [],
@@ -86,10 +85,18 @@ class _PackageListState extends State<PackageList> {
                         createdBy: stateUser.user.username,
                         price: 0,
                         introduce: '',
-                        accountPayment: 'account payment',
-                        imagePayment: '',
-                        typePayment: 'type payment',
                         description: '',
+                        contactAdmin: ContactAdminModel(
+                          accountPayment: '',
+                          address: '',
+                          createdBy: '',
+                          fullName: '',
+                          id: '',
+                          phoneNumber: '',
+                          typePayment: '',
+                          imagePayment: '',
+                          profileRef: '',
+                        ),
                       );
                       Navigator.push(
                         context,
@@ -163,18 +170,28 @@ class _PackageListState extends State<PackageList> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                               )),
-                          Container(
-                            width: width * 0.2,
-                            margin: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: AppConstant.bgHasTaged,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: TextCustom(
-                                title: tripsType ?? "วันเดย์ทริป",
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: width * 0.2,
+                                margin: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: AppConstant.bgHasTaged,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: TextCustom(
+                                    title: tripsType ?? "วันเดย์ทริป",
+                                  ),
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                width: width * 0.3,
+                                child: TextCustom(
+                                    title: '${packageModel.price}/ท่าน'),
+                              )
+                            ],
                           ),
                           // SizedBox(
                           //   height: 40,

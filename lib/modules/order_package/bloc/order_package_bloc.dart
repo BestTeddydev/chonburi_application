@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/models/order_custom.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
+import 'package:chonburi_mobileapp/utils/services/order_custom_service.dart';
 import 'package:chonburi_mobileapp/utils/services/order_package_service.dart';
 import 'package:chonburi_mobileapp/utils/services/upload_file_service.dart';
 import 'package:equatable/equatable.dart';
@@ -11,23 +13,26 @@ part 'order_package_event.dart';
 part 'order_package_state.dart';
 
 class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
-  OrderPackageBloc() : super(OrderPackageState(ordersPackages: const [])) {
+  OrderPackageBloc() : super(OrderPackageState(ordersPackages: const [],orderCustomPackages: [])) {
     on<CreateOrderPackageEvent>(_createOrderPackage);
     on<FetchsOrderPackageEvent>(_fetchsOrderPackages);
     on<UpdateOrderPackageEvent>(_updateOrderPackageStatus);
     on<SelectImageReceiptEvent>(_selectImageReceipt);
     on<BillOrderPackageEvent>(_billOrderPackage);
+    on<FetchsOrderCustomPackageEvent>(_fetchsOrderCustom);
   }
 
   void _createOrderPackage(
       CreateOrderPackageEvent event, Emitter<OrderPackageState> emitter) async {
     try {
       emitter(OrderPackageState(
+        orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages, loading: true));
       await OrderPackageService.createOrderPackage(
           event.orderPackageModel, event.token);
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages,
           loaded: true,
           loading: false,
@@ -38,6 +43,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     } catch (e) {
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages,
           hasError: true,
           loading: false,
@@ -51,6 +57,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
       FetchsOrderPackageEvent event, Emitter<OrderPackageState> emitter) async {
     try {
       emitter(OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
         ordersPackages: state.ordersPackages,
         loading: true,
       ));
@@ -61,6 +68,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
         event.businessId,
       );
       emitter(OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
         ordersPackages: orders,
         loaded: true,
         loading: false,
@@ -68,10 +76,67 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     } catch (e) {
       log(e.toString());
       emitter(OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
         ordersPackages: state.ordersPackages,
         hasError: true,
       ));
     }
+  }
+
+  void _fetchsOrderCustom(
+      FetchsOrderCustomPackageEvent event, Emitter<OrderPackageState> emitter) async {
+        try {
+      emitter(OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
+        ordersPackages: state.ordersPackages,
+        loading: true,
+      ));
+ 
+        List<OrderCustomModel> orders =
+          await OrderCustomService.fetchOrderCustoms(
+        event.token,
+        event.id,
+        event.businessId,
+      );
+      emitter(OrderPackageState(
+         orderCustomPackages: orders,
+        ordersPackages: state.ordersPackages,
+        loaded: true,
+        loading: false,
+      ));
+    } catch (e) {
+      log(e.toString());
+      emitter(OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
+        ordersPackages: state.ordersPackages,
+        hasError: true,
+      ));
+    }
+    // try {
+    //   emitter(CustomPackageState(
+    //     orders: state.orders,
+    //     loading: true,
+    //   ));
+    //   List<OrderCustomModel> orders =
+    //       await OrderCustomService.fetchOrderCustoms(
+    //     event.token,
+    //     event.id,
+    //     event.businessId,
+    //   );
+    //   emitter(CustomPackageState(
+    //     orders: orders,
+    //     rounds: state.rounds,
+    //     loaded: true,
+    //     loading: false,
+    //   ));
+    // } catch (e) {
+    //   print(e);
+    //   emitter(CustomPackageState(
+    //     rounds: state.rounds,
+    //     loaded: true,
+    //     loading: false,
+    //   ));
+    // }
   }
 
   void _updateOrderPackageStatus(
@@ -79,10 +144,11 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     Emitter<OrderPackageState> emitter,
   ) async {
     try {
-      await OrderPackageService.approveOrderPackage(
+      await OrderCustomService.approveOrderCustom(
           event.token, event.docId, event.status);
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages,
           loaded: true,
         ),
@@ -90,6 +156,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     } catch (e) {
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages,
           hasError: true,
         ),
@@ -104,6 +171,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     try {
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages,
           loading: true,
           reciepImage: state.reciepImage,
@@ -112,7 +180,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
       if (state.reciepImage.path.isNotEmpty) {
         String fileNamePayment =
             await UploadService.singleFile(state.reciepImage.path);
-        await OrderPackageService.billOrderPackage(
+        await OrderCustomService.billOrderCustom(
           event.token,
           event.docId,
           event.status,
@@ -120,6 +188,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
         );
         emitter(
           OrderPackageState(
+             orderCustomPackages: state.orderCustomPackages,
               ordersPackages: state.ordersPackages,
               loaded: true,
               loading: false,
@@ -129,6 +198,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
       } else {
         emitter(
           OrderPackageState(
+             orderCustomPackages: state.orderCustomPackages,
               ordersPackages: state.ordersPackages,
               hasError: true,
               loading: false,
@@ -139,6 +209,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
     } catch (e) {
       emitter(
         OrderPackageState(
+           orderCustomPackages: state.orderCustomPackages,
             ordersPackages: state.ordersPackages,
             hasError: true,
             loading: false,
@@ -152,6 +223,7 @@ class OrderPackageBloc extends Bloc<OrderPackageEvent, OrderPackageState> {
       SelectImageReceiptEvent event, Emitter<OrderPackageState> emitter) {
     emitter(
       OrderPackageState(
+         orderCustomPackages: state.orderCustomPackages,
           ordersPackages: state.ordersPackages, reciepImage: event.image),
     );
   }

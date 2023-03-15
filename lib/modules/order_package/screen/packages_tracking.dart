@@ -1,8 +1,10 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/home/services/buyer_service.dart';
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
 import 'package:chonburi_mobileapp/modules/order_package/screen/components/card_order_package.dart';
 import 'package:chonburi_mobileapp/modules/order_package/screen/order_detail_buyer.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,6 +37,27 @@ class _TrackingPackageState extends State<TrackingPackage> {
     return BlocBuilder<OrderPackageBloc, OrderPackageState>(
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            title: const TextCustom(title: 'สถานะแพ็คเกจของฉัน'),
+            backgroundColor: AppConstant.themeApp,
+            iconTheme: IconThemeData(color: AppConstant.colorTextHeader),
+            actions: [
+              IconButton(
+                onPressed: () => {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (builder) => BuyerService(
+                        token: widget.token,
+                      ),
+                    ),
+                    (route) => false,
+                  )
+                },
+                icon: const Icon(Icons.home),
+              )
+            ],
+          ),
           backgroundColor: AppConstant.backgroudApp,
           body: SingleChildScrollView(
             child: Column(

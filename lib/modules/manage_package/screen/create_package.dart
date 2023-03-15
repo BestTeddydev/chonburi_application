@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
+import 'package:chonburi_mobileapp/modules/contact_admin/models/contact_admin_model.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/bloc/manage_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_package/screen/select_day.dart';
@@ -350,8 +351,6 @@ class _CreatePackageState extends State<CreatePackage> {
                                       PackageTourModel(
                                     id: '',
                                     packageName: packageNameController.text,
-                                    contactPhone: contactPhoneController.text,
-                                    contactName: contactNameController.text,
                                     dayTrips: state.dayType,
                                     round: [],
                                     dayForrent: state.dayForrents,
@@ -360,10 +359,18 @@ class _CreatePackageState extends State<CreatePackage> {
                                     createdBy: '',
                                     price: double.parse(priceController.text),
                                     introduce: '',
-                                    imagePayment: '',
-                                    accountPayment: accountController.text,
-                                    typePayment: state.typePayment,
                                     description: descriptionController.text,
+                                    contactAdmin: ContactAdminModel(
+                                      accountPayment: '',
+                                      address: '',
+                                      createdBy: '',
+                                      fullName: '',
+                                      id: '',
+                                      phoneNumber: '',
+                                      typePayment: '',
+                                      imagePayment: '',
+                                      profileRef: '',
+                                    ),
                                   );
                                   context.read<ManagePackageBloc>().add(
                                         CreatePackageEvent(

@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
-import 'package:chonburi_mobileapp/modules/manage_package/models/package_tour_models.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/models/order_custom.dart';
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
+import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
 import 'package:chonburi_mobileapp/widget/dialog_camera.dart';
 import 'package:chonburi_mobileapp/widget/dialog_comfirm.dart';
 import 'package:chonburi_mobileapp/widget/dialog_error.dart';
@@ -15,13 +16,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaymentPackage extends StatefulWidget {
-  final PackageTourModel packageTourModel;
+  final OrderCustomModel orderCustomPackage;
   final double totalPrice;
   final String token;
   final String docId;
   const PaymentPackage({
     Key? key,
-    required this.packageTourModel,
+    required this.orderCustomPackage,
     required this.totalPrice,
     required this.docId,
     required this.token,
@@ -88,6 +89,8 @@ class _PaymentPackageState extends State<PaymentPackage> {
         },
         child: BlocBuilder<OrderPackageBloc, OrderPackageState>(
           builder: (context, state) {
+            OrderActivityModel orderActivity =
+                widget.orderCustomPackage.orderActivities.first;
             return SingleChildScrollView(
               child: Container(
                 width: width * 0.9,
@@ -95,14 +98,6 @@ class _PaymentPackageState extends State<PaymentPackage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      child: TextCustom(
-                        title: widget.packageTourModel.packageName,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        maxLine: 2,
-                      ),
-                    ),
                     Container(
                       margin: const EdgeInsets.only(
                         top: 10,
@@ -112,12 +107,13 @@ class _PaymentPackageState extends State<PaymentPackage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextCustom(
-                            title: 'ยอดที่ต้องชำระล่วงหน้า(50 %)',
+                            title: 'ยอดที่ต้องชำระ',
                             fontColor: AppConstant.bgChooseActivity,
                             fontWeight: FontWeight.w600,
                           ),
                           TextCustom(
-                            title: '${widget.totalPrice / 2} ฿',
+                            title:
+                                '${widget.totalPrice * orderActivity.totalPerson} ฿',
                             fontColor: AppConstant.bgChooseActivity,
                             fontWeight: FontWeight.w600,
                           ),
@@ -129,7 +125,8 @@ class _PaymentPackageState extends State<PaymentPackage> {
                         top: 6,
                       ),
                       child: TextCustom(
-                        title: widget.packageTourModel.typePayment,
+                        title:
+                            widget.orderCustomPackage.contactAdmin.typePayment,
                       ),
                     ),
                     Padding(
@@ -140,12 +137,16 @@ class _PaymentPackageState extends State<PaymentPackage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextCustom(
-                            title: widget.packageTourModel.accountPayment,
+                            title: widget
+                                .orderCustomPackage.contactAdmin.accountPayment,
                           ),
                           IconButton(
                             onPressed: () {
                               Clipboard.setData(
-                                ClipboardData(text: '${widget.totalPrice / 2}'),
+                                ClipboardData(
+                                  text: widget.orderCustomPackage.contactAdmin
+                                      .accountPayment,
+                                ),
                               );
                               showDialog(
                                 context: context,
@@ -169,7 +170,8 @@ class _PaymentPackageState extends State<PaymentPackage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: ShowImageNetwork(
-                            pathImage: widget.packageTourModel.imagePayment,
+                            pathImage: widget
+                                .orderCustomPackage.contactAdmin.imagePayment,
                           ),
                         ),
                       ),

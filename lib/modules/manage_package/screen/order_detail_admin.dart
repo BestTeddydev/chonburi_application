@@ -1,15 +1,15 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/models/order_custom.dart';
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
-import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
-import 'package:chonburi_mobileapp/modules/order_package/screen/components/card_order_package.dart';
 import 'package:chonburi_mobileapp/widget/dialog_comfirm.dart';
-import 'package:chonburi_mobileapp/widget/dialog_error.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class OrderDetailAdmin extends StatefulWidget {
-  final OrderPackageModel orderPackageModel;
+  final OrderCustomModel orderPackageModel;
   final String token;
   const OrderDetailAdmin({
     Key? key,
@@ -68,10 +68,75 @@ class _OrderDetailAdminState extends State<OrderDetailAdmin> {
               height: height * 0.82,
               child: ListView(
                 children: [
-                  CardOrderPackage(
-                    width: width,
-                    height: height,
-                    order: widget.orderPackageModel,
+                  Card(
+                    margin: const EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: AppConstant.bgOrderCard,
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: 20,
+                            bottom: 25,
+                          ),
+                          width: width * 0.4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Text(
+                              //   widget.orderPackageModel.packageName,
+                              //   style: TextStyle(
+                              //     color: AppConstant.colorTextHeader,
+                              //     fontWeight: FontWeight.w600,
+                              //     fontSize: 14,
+                              //   ),
+                              //   softWrap: true,
+                              //   maxLines: 2,
+                              //   overflow: TextOverflow.ellipsis,
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 8,
+                                  bottom: 8,
+                                ),
+                                child: Text(
+                                  'ราคา : ${widget.orderPackageModel.totalPrice} ฿',
+                                  style: TextStyle(
+                                    color: AppConstant.colorText,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                widget.orderPackageModel.status,
+                                style: TextStyle(
+                                  color: AppConstant.statusColor[
+                                      widget.orderPackageModel.status],
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextCustom(
+                                      title: DateFormat('dd/MM/yyyy').format(
+                                          widget.orderPackageModel.checkIn),
+                                      fontSize: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,

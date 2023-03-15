@@ -42,6 +42,7 @@ class ActivityService {
 
       return activities;
     } catch (e) {
+      print(e.toString());
       return [];
     }
   }
@@ -68,7 +69,8 @@ class ActivityService {
     ActivityModel activityModel,
     String token,
   ) async {
-    Response response = await DioService.dioPostAuthen('/activity', token, activityModel.toMap());
+    Response response = await DioService.dioPostAuthen(
+        '/activity', token, activityModel.toMap());
     ActivityModel activity = ActivityModel.fromMap(response.data);
     return activity;
   }

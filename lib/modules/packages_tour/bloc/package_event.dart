@@ -37,6 +37,11 @@ class SelectCheckDate extends PackageEvent {
   final DateTime date;
   const SelectCheckDate({required this.date});
 }
+
+class SelectCheckEndDate extends PackageEvent {
+  final DateTime date;
+  const SelectCheckEndDate({required this.date});
+}
 class TotalMemberEvent extends PackageEvent {
   final int member;
   const TotalMemberEvent({

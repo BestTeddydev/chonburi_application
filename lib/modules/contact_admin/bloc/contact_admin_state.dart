@@ -13,12 +13,14 @@ class ContactAdminState extends Equatable {
   }) : selectContact = selectContact ??
             ContactAdminModel(
               id: '',
-              adminId: '',
               fullName: '',
               address: '',
               phoneNumber: '',
               typePayment: '',
               accountPayment: '',
+              createdBy: '',
+              imagePayment: '',
+              profileRef: '',
             );
 
   @override

@@ -10,19 +10,10 @@ import 'package:dio/dio.dart';
 class PackageService {
   static Future<List<PackageTourModel>> fetchsPackages() async {
     try {
-      // Response response = await Dio().post(
-      //   '${APIRoute.host}/guest/packages',
-      //   options: Options(
-      //     headers: {HttpHeaders.contentTypeHeader: "application/json"},
-      //   ),
-      //   data: {"activities": activitiesID, "day": day},
-      // );
       Response response = await DioService.dioGet('/guest/packages');
       List<PackageTourModel> packages = [];
-      log('response.data ${response.data}');
       for (var package in response.data) {
         PackageTourModel packageModel = PackageTourModel.fromMapBuyer(package);
-        log('packageModel $packageModel');
         packages.add(packageModel);
       }
       return packages;

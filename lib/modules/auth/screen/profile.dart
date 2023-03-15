@@ -3,6 +3,8 @@ import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/auth/models/user_model.dart';
 import 'package:chonburi_mobileapp/modules/auth/screen/edit_profile.dart';
 import 'package:chonburi_mobileapp/modules/contact_info/screen/contact_list.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/screen/tracking_custom.dart';
+import 'package:chonburi_mobileapp/modules/order_package/screen/packages_tracking.dart';
 import 'package:chonburi_mobileapp/modules/register/screen/register.dart';
 import 'package:chonburi_mobileapp/modules/tracking_order_otop/screens/tracking_orders.dart';
 import 'package:chonburi_mobileapp/widget/show_image_network.dart';
@@ -186,42 +188,126 @@ class _ProfileState extends State<Profile> {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      child: TextButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (builder) => TrackingOrderOtop(
-                              token: state.user.token,
-                              userId: state.user.userId,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.1,
-                              child: Icon(
-                                Icons.delivery_dining_rounded,
-                                color: AppConstant.colorText,
-                              ),
-                            ),
-                            SizedBox(
-                              width: width * 0.76,
-                              child: Text(
-                                'ติดตามสินค้าโอท็อปของฉัน',
-                                style: TextStyle(
-                                  color: AppConstant.colorText,
+                      child: state.user.roles == "buyer"
+                          ? TextButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => TrackingPackage(
+                                    token: state.user.token,
+                                    userId: state.user.userId,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: AppConstant.colorText,
-                              size: 16,
-                            ),
-                          ],
-                        ),
-                      ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Icon(
+                                      Icons.pin_drop_sharp,
+                                      color: AppConstant.colorText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.76,
+                                    child: Text(
+                                      'ติดตามแพ็คเกจทัวร์ของฉัน',
+                                      style: TextStyle(
+                                        color: AppConstant.colorText,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppConstant.colorText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: state.user.roles == "buyer"
+                          ? TextButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => TrackingCustom(
+                                    token: state.user.token,
+                                    userId: state.user.userId,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Icon(
+                                      Icons.pin_drop_sharp,
+                                      color: AppConstant.colorText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.76,
+                                    child: Text(
+                                      'ติดตามคัสตอมแพ็คเกจทัวร์',
+                                      style: TextStyle(
+                                        color: AppConstant.colorText,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppConstant.colorText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: state.user.roles == "buyer"
+                          ? TextButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => TrackingOrderOtop(
+                                    token: state.user.token,
+                                    userId: state.user.userId,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Icon(
+                                      Icons.delivery_dining_rounded,
+                                      color: AppConstant.colorText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.76,
+                                    child: Text(
+                                      'ติดตามสินค้าโอท็อปของฉัน',
+                                      style: TextStyle(
+                                        color: AppConstant.colorText,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppConstant.colorText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
                     ),
                     Container(
                       margin: const EdgeInsets.all(4),
