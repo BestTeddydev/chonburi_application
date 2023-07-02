@@ -46,10 +46,10 @@ class _HomeBusinessState extends State<HomeBusiness> {
             icon: Icon(Icons.home_outlined),
             label: 'หน้าหลัก',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_activity_outlined),
-            label: 'กิจกรรม',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.local_activity_outlined),
+          //   label: 'กิจกรรม',
+          // ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.reorder),

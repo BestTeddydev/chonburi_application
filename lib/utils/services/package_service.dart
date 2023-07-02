@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:chonburi_mobileapp/constants/api_path.dart';
@@ -9,17 +8,13 @@ import 'package:dio/dio.dart';
 
 class PackageService {
   static Future<List<PackageTourModel>> fetchsPackages() async {
-    try {
-      Response response = await DioService.dioGet('/guest/packages');
-      List<PackageTourModel> packages = [];
-      for (var package in response.data) {
-        PackageTourModel packageModel = PackageTourModel.fromMapBuyer(package);
-        packages.add(packageModel);
-      }
-      return packages;
-    } catch (e) {
-      return [];
+    Response response = await DioService.dioGet('/guest/packages');
+    List<PackageTourModel> packages = [];
+    for (var package in response.data) {
+      PackageTourModel packageModel = PackageTourModel.fromMapBuyer(package);
+      packages.add(packageModel);
     }
+    return packages;
   }
 
   static Future<PackageTourModel> fetchPackage(String packageID) async {

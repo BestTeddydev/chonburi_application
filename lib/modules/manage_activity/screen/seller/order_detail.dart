@@ -1,15 +1,14 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/custom_package/models/order_custom.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/bloc/manage_activity_bloc.dart';
 import 'package:chonburi_mobileapp/modules/order_package/models/order_activity.dart';
-import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
-import 'package:chonburi_mobileapp/modules/order_package/screen/components/card_order_package.dart';
 import 'package:chonburi_mobileapp/widget/dialog_comfirm.dart';
 import 'package:chonburi_mobileapp/widget/dialog_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderDetail extends StatefulWidget {
-  final OrderPackageModel orderPackageModel;
+  final OrderCustomModel orderPackageModel;
   final String businessId;
   final String token;
   const OrderDetail({
@@ -24,7 +23,6 @@ class OrderDetail extends StatefulWidget {
 }
 
 class _OrderDetailState extends State<OrderDetail> {
-
   @override
   void initState() {
     context.read<ManageActivityBloc>().add(
@@ -37,14 +35,12 @@ class _OrderDetailState extends State<OrderDetail> {
   }
 
   onAcceptOrder(BuildContext context) {
-    context.read<ManageActivityBloc>().add(
-          ActionOrderActivityEvent(
-            token: widget.token,
-            businessId: widget.businessId,
-            status: AppConstant.acceptStatus,
-            docId: widget.orderPackageModel.id,
-          ),
-        );
+    context.read<ManageActivityBloc>().add(ActionOrderActivityEvent(
+          token: widget.token,
+          businessId: widget.businessId,
+          status: AppConstant.acceptStatus,
+          docId: widget.orderPackageModel.id,
+        ));
   }
 
   onRejecttOrder(BuildContext context) {
@@ -88,11 +84,11 @@ class _OrderDetailState extends State<OrderDetail> {
                   height: height * 0.82,
                   child: ListView(
                     children: [
-                      CardOrderPackage(
-                        width: width,
-                        height: height,
-                        order: widget.orderPackageModel,
-                      ),
+                      // CardOrderPackage(
+                      //   width: width,
+                      //   height: height,
+                      //   order: widget.orderPackageModel,
+                      // ),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),

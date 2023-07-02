@@ -34,6 +34,8 @@ class _EditActivityState extends State<EditActivity> {
   TextEditingController priceController = TextEditingController();
   TextEditingController unitController = TextEditingController();
   TextEditingController minPersonController = TextEditingController();
+  TextEditingController usageTimeController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -41,13 +43,14 @@ class _EditActivityState extends State<EditActivity> {
     priceController.text = widget.activity.price.toString();
     unitController.text = widget.activity.unit;
     minPersonController.text = widget.activity.minPerson.toString();
+    usageTimeController.text = widget.activity.usageTime;
     fetchData();
   }
 
   fetchData() async {
     context.read<BusinessesBloc>().add(
           FetchBusinessByIdEvent(
-            docId: widget.activity.businessId,
+            docId: widget.activity.placeId,
           ),
         );
     List<File> images = [];
@@ -186,6 +189,16 @@ class _EditActivityState extends State<EditActivity> {
                                               ),
                                             ),
                                           ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: width * 0.7,
+                                        margin: const EdgeInsets.all(10),
+                                        child: TextFormFieldCustom(
+                                          controller: usageTimeController,
+                                          labelText: 'ระยะเวลาในการทำกิจกรรม',
+                                          requiredText:
+                                              'กรุณากรอกระยะเวลาในการทำกิจกรรม',
                                         ),
                                       ),
                                       Container(
@@ -366,7 +379,8 @@ class _EditActivityState extends State<EditActivity> {
                                       imageRef: imageRef,
                                       minPerson:
                                           int.parse(minPersonController.text),
-                                      businessId:
+                                      usageTime: usageTimeController.text,
+                                      placeId:
                                           stateBusiness.businessModel.id,
                                       accepted: widget.activity.accepted,
                                     );

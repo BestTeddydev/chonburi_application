@@ -5,23 +5,19 @@ import 'package:path/path.dart';
 
 class UploadService {
   static Future<String> singleFile(String filePath) async {
-    try {
-      String fileName = basename(filePath);
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(
-          filePath,
-          filename: fileName,
-          contentType: MediaType(
-            'jpg',
-            'image',
-          ),
+    String fileName = basename(filePath);
+    FormData formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        filePath,
+        filename: fileName,
+        contentType: MediaType(
+          'jpg',
+          'image',
         ),
-      });
-      await DioService.dioPost('/upload/file/single', formData);
-      return fileName;
-    } catch (e) {
-      return e.toString();
-    }
+      ),
+    });
+    await DioService.dioPost('/upload/file/single', formData);
+    return fileName;
   }
 
   static Future<List<String>> multipleFile(List<String> filePath) async {

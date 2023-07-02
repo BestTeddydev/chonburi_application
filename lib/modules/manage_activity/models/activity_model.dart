@@ -1,4 +1,3 @@
-
 class ActivityModel {
   String id;
   String activityName;
@@ -6,8 +5,9 @@ class ActivityModel {
   String unit;
   List<String> imageRef;
   int minPerson;
-  String businessId;
+  String placeId;
   bool accepted;
+  String usageTime;
   ActivityModel({
     required this.id,
     required this.activityName,
@@ -15,8 +15,9 @@ class ActivityModel {
     required this.unit,
     required this.imageRef,
     required this.minPerson,
-    required this.businessId,
+    required this.placeId,
     required this.accepted,
+    required this.usageTime,
   });
 
   ActivityModel copyWith({
@@ -26,8 +27,9 @@ class ActivityModel {
     String? unit,
     List<String>? imageRef,
     int? minPerson,
-    String? businessId,
+    String? placeId,
     bool? accepted,
+    String? usageTime,
   }) {
     return ActivityModel(
       id: id ?? this.id,
@@ -36,8 +38,9 @@ class ActivityModel {
       unit: unit ?? this.unit,
       imageRef: imageRef ?? this.imageRef,
       minPerson: minPerson ?? this.minPerson,
-      businessId: businessId ?? this.businessId,
+      placeId: placeId ?? this.placeId,
       accepted: accepted ?? this.accepted,
+      usageTime: usageTime ?? this.usageTime,
     );
   }
 
@@ -48,8 +51,9 @@ class ActivityModel {
       'unit': unit,
       'imageRef': imageRef,
       'minPerson': minPerson,
-      'businessId': businessId,
+      'placeId': placeId,
       'accepted': accepted,
+      'usageTime': usageTime,
     };
   }
 
@@ -61,8 +65,9 @@ class ActivityModel {
       'unit': unit,
       'imageRef': imageRef,
       'minPerson': minPerson,
-      'businessId': businessId,
+      'placeId': placeId,
       'accepted': accepted,
+      'usageTime': usageTime,
     };
   }
 
@@ -80,8 +85,9 @@ class ActivityModel {
       unit: '',
       imageRef: [],
       minPerson: 0,
-      businessId: '',
+      placeId: '',
       accepted: true,
+      usageTime: '',
     );
   }
 
@@ -93,8 +99,9 @@ class ActivityModel {
       unit: map['unit'],
       imageRef: List<String>.from(map['imageRef']),
       minPerson: map['minPerson']?.toInt(),
-      businessId: map['businessId'],
+      placeId: map['placeId'],
       accepted: map['accepted'],
+      usageTime: map['usageTime'] ?? '',
     );
   }
 }

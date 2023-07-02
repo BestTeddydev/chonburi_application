@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -352,8 +353,8 @@ class ManageActivityBloc
         OrderActivityModel order = state.orderActivityBusiness[i];
         orders.add(order.copyWith(status: event.status));
       }
-      await OrderPackageService.actionOrderActivity(
-          event.token, event.docId, event.status, event.businessId);
+      await OrderPackageService.actionOrderActivity(event.token, event.docId,
+          event.status, event.businessId);
       emitter(ManageActivityState(
         activities: state.activities,
         business: state.business,
@@ -361,6 +362,7 @@ class ManageActivityBloc
         orderActivityBusiness: orders,
       ));
     } catch (e) {
+      log(e.toString());
       emitter(ManageActivityState(
         activities: state.activities,
         business: state.business,

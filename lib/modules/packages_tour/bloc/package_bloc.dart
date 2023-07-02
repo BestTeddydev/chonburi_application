@@ -100,7 +100,9 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
       ),
     );
   }
-  void _selectCheckEndDate(SelectCheckEndDate event, Emitter<PackageState> emitter) {
+
+  void _selectCheckEndDate(
+      SelectCheckEndDate event, Emitter<PackageState> emitter) {
     // event คือตัวที่รับค่าใหม่มา
     // state คือตัวที่เก็บค่าเก่าไว้
     emitter(
@@ -126,10 +128,10 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
         packages: state.packages,
         totalMember: event.member,
         checkEndDate: state.checkEndDate,
-        
       ),
     );
   }
+
   // cancel not use
   void _buyActivity(BuyActivityEvent event, Emitter<PackageState> emitter) {
     List<OrderActivityModel> allActivities = List.from(state.buyActivity)
@@ -147,6 +149,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
       ),
     );
   }
+
   // cancel not use
   void _cancelActivity(
       CancelActivityEvent event, Emitter<PackageState> emitter) {
@@ -169,6 +172,7 @@ class PackageBloc extends HydratedBloc<PackageEvent, PackageState> {
       ),
     );
   }
+
   // not use
   void _clearBuyActivity(
       ClearBuyActivityEvent event, Emitter<PackageState> emitter) {

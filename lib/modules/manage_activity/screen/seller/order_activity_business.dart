@@ -1,16 +1,16 @@
+import 'package:chonburi_mobileapp/modules/custom_package/models/order_custom.dart';
 import 'package:chonburi_mobileapp/modules/manage_activity/screen/seller/order_detail.dart';
 import 'package:chonburi_mobileapp/modules/order_package/bloc/order_package_bloc.dart';
-import 'package:chonburi_mobileapp/modules/order_package/models/order_package.dart';
-import 'package:chonburi_mobileapp/modules/order_package/screen/components/card_order_package.dart';
+import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderActivityBusiness extends StatefulWidget {
   final String token;
-  final String businessId;
+  final String placeId;
   const OrderActivityBusiness({
     Key? key,
-    required this.businessId,
+    required this.placeId,
     required this.token,
   }) : super(key: key);
 
@@ -22,9 +22,9 @@ class _OrderActivityBusinessState extends State<OrderActivityBusiness> {
   @override
   void initState() {
     context.read<OrderPackageBloc>().add(
-          FetchsOrderPackageEvent(
+          FetchsOrderCustomPackageEvent(
             token: widget.token,
-            businessId: widget.businessId,
+            businessId: widget.placeId,
           ),
         );
     super.initState();
@@ -37,7 +37,7 @@ class _OrderActivityBusinessState extends State<OrderActivityBusiness> {
     return Scaffold(
       body: BlocBuilder<OrderPackageBloc, OrderPackageState>(
         builder: (context, state) {
-          List<OrderPackageModel> orders = state.ordersPackages;
+          List<OrderCustomModel> orders = state.orderCustomPackages;
           return ListView(
             children: [
               ListView.builder(
@@ -45,24 +45,25 @@ class _OrderActivityBusinessState extends State<OrderActivityBusiness> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: orders.length,
                 itemBuilder: (itemBuilder, index) {
-                  OrderPackageModel order = orders[index];
+                  OrderCustomModel order = orders[index];
                   return InkWell(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (builder) => OrderDetail(
-                          orderPackageModel: order,
-                          businessId: widget.businessId,
-                          token: widget.token,
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (builder) => OrderDetail(
+                                orderPackageModel: order,
+                                businessId: widget.placeId,
+                                token: widget.token,
+                              ),
+                            ),
+                          ),
+                      child: Card(
+                        margin: const EdgeInsets.all(5),
+                        child: TextCustom(
+                          title: 'โดยคุณ ${order.contact.fullName}',
+                          maxLine: 2,
                         ),
-                      ),
-                    ),
-                    child: CardOrderPackage(
-                      width: width,
-                      height: height,
-                      order: order,
-                    ),
-                  );
+                      ));
                 },
               ),
             ],

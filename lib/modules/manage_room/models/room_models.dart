@@ -8,7 +8,7 @@ class RoomModel {
   String categoryId;
   String descriptionRoom;
   int totalRoom;
-  double roomSize;
+  String roomSize;
   int totalGuest;
   RoomModel({
     required this.id,
@@ -34,7 +34,7 @@ class RoomModel {
     String? categoryId,
     String? descriptionRoom,
     int? totalRoom,
-    double? roomSize,
+    String? roomSize,
     int? totalGuest,
   }) {
     return RoomModel(
@@ -78,7 +78,7 @@ class RoomModel {
       categoryId: map['categoryId'],
       descriptionRoom: map['descriptionRoom'],
       totalRoom: map['totalRoom']?.toInt(),
-      roomSize: map['roomSize']?.toDouble(),
+      roomSize: map['roomSize'],
       totalGuest: map['totalGuest']?.toInt(),
     );
   }

@@ -39,11 +39,12 @@ class OrderPackageService {
 
   static Future<void> actionOrderActivity(
       String token, String docId, String status, String businessId) async {
-    await DioService.dioPut('/order/package/activity/$docId', token, {
+    await DioService.dioPut('/custom/package/activity/$docId', token, {
       "status": status,
       "businessId": businessId,
     });
   }
+
   // cancel
   static Future<void> approveOrderPackage(
     String token,
@@ -52,6 +53,7 @@ class OrderPackageService {
   ) async {
     await DioService.dioPut('/order/package/$docId', token, {"status": status});
   }
+
   // cancel
   static Future<void> billOrderPackage(
     String token,

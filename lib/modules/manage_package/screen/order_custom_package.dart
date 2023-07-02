@@ -97,13 +97,17 @@ class _OrderCustomPackageState extends State<OrderCustomPackage> {
                                     top: 8,
                                     bottom: 8,
                                   ),
-                                  child: Text(
-                                    'ราคา : ${order.totalPrice} ฿',
-                                    style: TextStyle(
-                                      color: AppConstant.colorText,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
+                                  child: TextCustom(
+                                    title: 'โดยคุณ ${order.contact.fullName}',
+                                    maxLine: 2,
+                                  ),
+                                ),
+                                Text(
+                                  'ราคา : ${order.totalPrice} ฿',
+                                  style: TextStyle(
+                                    color: AppConstant.colorText,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
                                   ),
                                 ),
                                 Text(

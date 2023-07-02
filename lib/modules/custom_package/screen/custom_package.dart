@@ -91,7 +91,7 @@ class _CustomPackagePageState extends State<CustomPackagePage> {
           price: activityModel.price,
           imageRef: activityModel.imageRef,
           totalPerson: totalMember,
-          businessId: activityModel.businessId,
+          businessId: activityModel.placeId,
           status: AppConstant.waitingStatus,
           roundId: round.id,
           roundName: round.round,

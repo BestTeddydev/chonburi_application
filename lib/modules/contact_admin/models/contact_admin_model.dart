@@ -22,7 +22,6 @@ class ContactAdminModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      '_id': id,
       'createdBy': createdBy,
       'fullName': fullName,
       'address': address,
@@ -36,15 +35,15 @@ class ContactAdminModel {
 
   factory ContactAdminModel.fromMap(Map<String, dynamic> map) {
     return ContactAdminModel(
-      id: map['_id'],
-      createdBy: map['createdBy'],
-      fullName: map['fullName'],
-      address: map['address'],
-      phoneNumber: map['phoneNumber'],
-      typePayment: map['typePayment'],
-      accountPayment: map['accountPayment'],
-      imagePayment: map['imagePayment'],
-      profileRef: map['profileRef'],
+      id: map['_id'] ?? '',
+      createdBy: map['createdBy'] ?? '',
+      fullName: map['fullName'] ?? '',
+      address: map['address'] ?? '',
+      phoneNumber: map['phoneNumber'] ?? '',
+      typePayment: map['typePayment'] ?? '',
+      accountPayment: map['accountPayment'] ?? '',
+      imagePayment: map['imagePayment'] ?? '',
+      profileRef: map['profileRef'] ?? '',
     );
   }
 }

@@ -39,9 +39,9 @@ class PackageRoundModel {
   }
   factory PackageRoundModel.fromMapActivityId(Map<String, dynamic> map) {
     return PackageRoundModel(
-      id: map['_id'],
-      round: map['round'],
-      dayType: map['dayType'],
+      id: map['_id']?? '',
+      round: map['round'] ?? '',
+      dayType: map['dayType'] ?? 0,
       activities: List<ActivityModel>.from(
         map['activities'].map(
           (x) => ActivityModel.fromMap(
@@ -52,7 +52,7 @@ class PackageRoundModel {
               'unit': '',
               'imageRef': [],
               'minPerson': 0,
-              'businessId': '',
+              'placeId': '',
               'accepted': true,
             },
           ),

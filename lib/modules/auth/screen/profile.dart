@@ -2,6 +2,7 @@ import 'package:chonburi_mobileapp/constants/app_constant.dart';
 import 'package:chonburi_mobileapp/modules/auth/bloc/user_bloc.dart';
 import 'package:chonburi_mobileapp/modules/auth/models/user_model.dart';
 import 'package:chonburi_mobileapp/modules/auth/screen/edit_profile.dart';
+import 'package:chonburi_mobileapp/modules/booking_room/screen/track_booking_room.dart';
 import 'package:chonburi_mobileapp/modules/contact_info/screen/contact_list.dart';
 import 'package:chonburi_mobileapp/modules/custom_package/screen/tracking_custom.dart';
 import 'package:chonburi_mobileapp/modules/order_package/screen/packages_tracking.dart';
@@ -294,6 +295,47 @@ class _ProfileState extends State<Profile> {
                                     width: width * 0.76,
                                     child: Text(
                                       'ติดตามสินค้าโอท็อปของฉัน',
+                                      style: TextStyle(
+                                        color: AppConstant.colorText,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppConstant.colorText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: state.user.roles == "buyer"
+                          ? TextButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (builder) => TrackBookingRoom(
+                                    token: state.user.token,
+                                    userId: state.user.userId,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.1,
+                                    child: Icon(
+                                      Icons.pin_drop_sharp,
+                                      color: AppConstant.colorText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.76,
+                                    child: Text(
+                                      'ติดตามสถานะห้องพัก',
                                       style: TextStyle(
                                         color: AppConstant.colorText,
                                       ),

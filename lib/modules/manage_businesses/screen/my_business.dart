@@ -1,14 +1,15 @@
 import 'package:chonburi_mobileapp/constants/app_constant.dart';
+import 'package:chonburi_mobileapp/modules/booking_room/screen/my_booking_room.dart';
 import 'package:chonburi_mobileapp/modules/businesses/bloc/businesses_bloc.dart';
 import 'package:chonburi_mobileapp/modules/businesses/models/business_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/home_business.dart';
-import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_activity.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_food.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_product.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/main_room.dart';
 import 'package:chonburi_mobileapp/modules/manage_businesses/screen/setting_business.dart';
 import 'package:chonburi_mobileapp/modules/notification/screen/notification.dart';
 import 'package:chonburi_mobileapp/modules/order_otop/screen/my_orders.dart';
+import 'package:chonburi_mobileapp/modules/order_restaurant/screen/order_restaurant.dart';
 import 'package:chonburi_mobileapp/widget/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,7 @@ class _MyBusinessesState extends State<MyBusinesses> {
                 businessId: businessModel.id,
                 token: token,
               ),
-              MainActivity(businessId: businessModel.id),
+              const OrderRestaurant(),
               MyNotification(recipientId: businessModel.id),
               SettingBusiness(
                 token: token,
@@ -70,7 +71,6 @@ class _MyBusinessesState extends State<MyBusinesses> {
                 businessId: businessModel.id,
                 token: token,
               ),
-              MainActivity(businessId: businessModel.id),
               MyOrdersOtop(token: token, businessId: businessModel.id),
               MyNotification(recipientId: businessModel.id),
               SettingBusiness(
@@ -93,7 +93,7 @@ class _MyBusinessesState extends State<MyBusinesses> {
                 businessId: businessModel.id,
                 token: token,
               ),
-              MainActivity(businessId: businessModel.id),
+              MyBookingRoom(businessId: businessModel.id, token: token),
               MyNotification(recipientId: businessModel.id),
               SettingBusiness(
                 token: token,

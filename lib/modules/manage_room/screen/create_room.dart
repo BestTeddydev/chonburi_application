@@ -328,8 +328,7 @@ class _CreateRoomState extends State<CreateRoom> {
                                   descriptionRoom: descriptionController.text,
                                   totalRoom:
                                       int.parse(totalRoomController.text),
-                                  roomSize:
-                                      double.parse(roomSizeController.text),
+                                  roomSize: roomSizeController.text,
                                   totalGuest:
                                       int.parse(totalGuestController.text),
                                 );

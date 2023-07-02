@@ -26,6 +26,7 @@ class _CreateActivityState extends State<CreateActivity> {
   TextEditingController priceController = TextEditingController();
   TextEditingController unitController = TextEditingController();
   TextEditingController minPersonController = TextEditingController();
+  TextEditingController usageTimeController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -35,7 +36,6 @@ class _CreateActivityState extends State<CreateActivity> {
   }
 
   onSelectImage(File image) {
-    // context.read<ManageActivityBloc>().add(SelectImageEvent(image: image.path));
     context.read<ManageActivityBloc>().add(SelectImageEvent(image: image));
   }
 
@@ -142,6 +142,16 @@ class _CreateActivityState extends State<CreateActivity> {
                                     width: width * 0.7,
                                     margin: const EdgeInsets.all(10),
                                     child: TextFormFieldCustom(
+                                      controller: usageTimeController,
+                                      labelText: 'ระยะเวลาในการทำกิจกรรม',
+                                      requiredText:
+                                          'กรุณากรอกระยะเวลาในการทำกิจกรรม',
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width * 0.7,
+                                    margin: const EdgeInsets.all(10),
+                                    child: TextFormFieldCustom(
                                       controller: priceController,
                                       labelText: 'ราคา',
                                       requiredText: 'กรุณากรอกราคา',
@@ -171,7 +181,7 @@ class _CreateActivityState extends State<CreateActivity> {
                             ),
                             Container(
                               width: width * 1,
-                              height: height * 0.18,
+                              height: height * 0.14,
                               margin: const EdgeInsets.only(
                                 top: 20,
                                 left: 6,
@@ -290,7 +300,8 @@ class _CreateActivityState extends State<CreateActivity> {
                                     imageRef: imageRef,
                                     minPerson:
                                         int.parse(minPersonController.text),
-                                    businessId: state.business.businessId,
+                                    usageTime: usageTimeController.text,
+                                    placeId: state.business.businessId,
                                     accepted: false,
                                   );
                                   context.read<ManageActivityBloc>().add(

@@ -1,3 +1,4 @@
+import 'package:chonburi_mobileapp/modules/manage_room/models/room_left_models.dart';
 import 'package:chonburi_mobileapp/modules/manage_room/models/room_models.dart';
 import 'package:chonburi_mobileapp/utils/helper/dio.dart';
 import 'package:dio/dio.dart';
@@ -14,8 +15,23 @@ class RoomService {
     return foods;
   }
 
-  static Future<RoomModel> createRoom(
-      String token, RoomModel roomModel) async {
+  static Future<List<RoomLeftModel>> fetchsRoomLeft(
+    String businessId,
+    DateTime checkIn,
+    DateTime checkOut,
+  ) async {
+    List<RoomLeftModel> roomsLeft = [];
+    Response response = await DioService.dioGet(
+        '/guest/room/left/$businessId/$checkIn/$checkOut');
+    for (var data in response.data) {
+      RoomLeftModel roomLeftModel = RoomLeftModel.fromMap(data);
+      roomsLeft.add(roomLeftModel);
+    }
+    
+    return roomsLeft;
+  }
+
+  static Future<RoomModel> createRoom(String token, RoomModel roomModel) async {
     Response response = await DioService.dioPostAuthen(
       '/room',
       token,

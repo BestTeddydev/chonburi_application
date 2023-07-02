@@ -3,8 +3,8 @@ import 'package:chonburi_mobileapp/constants/asset_path.dart';
 import 'package:chonburi_mobileapp/modules/home/screen/components/menu_card_admin.dart';
 import 'package:chonburi_mobileapp/modules/otop/screen/otops.dart';
 import 'package:chonburi_mobileapp/modules/packages_tour/screen/home_packages.dart';
+import 'package:chonburi_mobileapp/modules/resorts/screen/canlendar_checkin.dart';
 import 'package:chonburi_mobileapp/modules/restaurant/screen/restaurants.dart';
-import 'package:chonburi_mobileapp/widget/warning.dart';
 import 'package:flutter/material.dart';
 
 class HomeBuyer extends StatelessWidget {
@@ -28,23 +28,11 @@ class HomeBuyer extends StatelessWidget {
         "pathImage": AppConstantAssets.otopImage,
         "goWidget": const Otops(),
       },
-      // {
-      //   "title": 'บ้านพัก',
-      //   "pathImage": AppConstantAssets.resortImage,
-      //   "goWidget": const WarningDeveloping(),
-      // },
-
-      // {
-      //   "title": 'แหล่งท่องเที่ยว',
-      //   "pathImage": AppConstantAssets.locationImage,
-      //   "goWidget": Locations(isAdmin: true),
-      // },
-
-      // {
-      //   "title": 'กิจการยอดนิยม',
-      //   "pathImage": AppConstantAssets.partnerImage,
-      //   "goWidget": BusinessPopular(),
-      // },
+      {
+        "title": 'บ้านพัก',
+        "pathImage": AppConstantAssets.resortImage,
+        "goWidget": const CalendarCheckIn(),
+      },
     ];
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;

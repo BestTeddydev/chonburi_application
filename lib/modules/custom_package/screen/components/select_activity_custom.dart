@@ -135,8 +135,13 @@ class _SelectActivityCustomState extends State<SelectActivityCustom> {
                                               ),
                                             ),
                                             TextCustom(
-                                                title:
-                                                    '${state.activities[index].price} ฿')
+                                              title:
+                                                  '${state.activities[index].price} ฿',
+                                            ),
+                                            TextCustom(
+                                              title:
+                                                  '${state.activities[index].usageTime} ',
+                                            ),
                                           ],
                                         ),
                                       ),

@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActivityBusiness extends StatefulWidget {
-  final String token, businessId;
+  final String token, placeId;
   final bool accepted;
   const ActivityBusiness({
     Key? key,
-    required this.businessId,
+    required this.placeId,
     required this.token,
     required this.accepted,
   }) : super(key: key);
@@ -26,7 +26,7 @@ class _ActivityBusinessState extends State<ActivityBusiness> {
     context.read<ManageActivityBloc>().add(
           FetchActivityBusiness(
             token: widget.token,
-            businessId: widget.businessId,
+            businessId: widget.placeId,
             accepted: widget.accepted,
           ),
         );
@@ -147,9 +147,11 @@ class _ActivityBusinessState extends State<ActivityBusiness> {
                                                 .activities[index].imageRef,
                                             minPerson: state
                                                 .activities[index].minPerson,
-                                            businessId: state
-                                                .activities[index].businessId,
+                                            placeId:
+                                                state.activities[index].placeId,
                                             accepted: true,
+                                            usageTime: state
+                                                .activities[index].usageTime,
                                           );
                                           dialogApproveActivity(
                                             context,
@@ -179,8 +181,10 @@ class _ActivityBusinessState extends State<ActivityBusiness> {
                                                 .activities[index].imageRef,
                                             minPerson: state
                                                 .activities[index].minPerson,
-                                            businessId: '',
+                                            placeId: '',
                                             accepted: false,
+                                            usageTime: state
+                                                .activities[index].usageTime,
                                           );
                                           dialogApproveActivity(
                                             context,

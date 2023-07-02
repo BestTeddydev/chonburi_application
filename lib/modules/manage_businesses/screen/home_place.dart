@@ -43,7 +43,7 @@ class _HomePlaceState extends State<HomePlace> {
         return Scaffold(
           body: SafeArea(
             child: [
-              MainActivity(businessId: widget.placeModel.id),
+              MainActivity(placeId: widget.placeModel.id),
               MyNotification(recipientId: widget.placeModel.id),
               SettingPlace(
                 userId: state.user.userId,

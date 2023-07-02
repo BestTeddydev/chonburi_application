@@ -100,20 +100,20 @@ class PackageTourModel {
   factory PackageTourModel.fromMapBuyer(Map<String, dynamic>? map) {
     if (map != null) {
       return PackageTourModel(
-        id: map['_id'],
-        packageName: map['packageName'],
-        dayTrips: map['dayTrips'],
+        id: map['_id'] ?? '',
+        packageName: map['packageName'] ?? '',
+        dayTrips: map['dayTrips'] ?? '',
         round: List<PackageRoundModel>.from(
           map['round'].map(
             (x) => PackageRoundModel.fromMapActivityId(x),
           ),
         ),
         dayForrent: List<String>.from(map['dayForrent']),
-        packageImage: map['packageImage'],
-        mark: map['mark'],
-        createdBy: map['createdBy'],
+        packageImage: map['packageImage'] ?? '',
+        mark: map['mark'] ?? '',
+        createdBy: map['createdBy'] ?? '',
         price: map['price']?.toDouble(),
-        introduce: map['introduce'],
+        introduce: map['introduce'] ?? '',
         description: map['description'] ?? '',
         contactAdmin: ContactAdminModel.fromMap(map['contactAdmin']),
       );

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainActivity extends StatefulWidget {
-  final String businessId;
-  const MainActivity({Key? key, required this.businessId}) : super(key: key);
+  final String placeId;
+  const MainActivity({Key? key, required this.placeId}) : super(key: key);
 
   @override
   State<MainActivity> createState() => _MainActivityState();
@@ -56,16 +56,16 @@ class _MainActivityState extends State<MainActivity> {
             return TabBarView(
               children: [
                 ActivityBusiness(
-                  businessId: widget.businessId,
+                  placeId: widget.placeId,
                   token: state.user.token,
                   accepted: true,
                 ),
                 OrderActivityBusiness(
-                  businessId: widget.businessId,
+                  placeId: widget.placeId,
                   token: state.user.token,
                 ),
                 ActivityBusiness(
-                  businessId: widget.businessId,
+                  placeId: widget.placeId,
                   token: state.user.token,
                   accepted: false,
                 ),
